@@ -3,7 +3,7 @@
 <html lang="da">
   <head>
         <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>Skovsted Consulting - Scanner App</title>
         <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
@@ -21,10 +21,11 @@
             padding: 20px;
         }
         .header{
-            display: flex;
              background-color: #D2E9E9;
-             padding-right: 30px;
+             padding-bottom: 50px;
              align-items:center;
+             text-align: center;
+
         }
         .header img{
             width: 200px;
@@ -32,12 +33,12 @@
         .header h1{
             margin-left: auto;
             font-family: 'Montserrat', sans-serif;
-            font-size: 40px;
+            font-size: 30px;
         }
         table{
             width: 100%;
             border-collapse: collapse;
-            margin: 30px 0;
+            margin: 50px 0;
 
         }
         table tr td{
@@ -50,8 +51,8 @@
         }
         .scanner-div #ean{
     display: block;
-    padding: .75rem .75rem;
-    font-size: 1rem;
+    padding: 1rem;
+    font-size: 1.2rem;
     line-height: 1.5;
     color: #495057;
     background-color: #fff;
@@ -62,7 +63,7 @@
     width: 250px;
         }
         label{
-            font-size: 20px;
+            font-size: 25px;
         }
         table input[type='number']{
     display: block;
@@ -120,7 +121,7 @@
         </div>
 
         <div id="error"></div> <!--"Sorry, your browser does not support Web Storage..." -->
-
+        <div style="overflow-x: scroll;">
         <table id="journal" border="1">
             <tr class="thd">
                 <td>Name</td>
@@ -130,7 +131,8 @@
                 <td>Actions</td>
             </tr>
         </table>
-
+        </div>
+        <br>
         <form>
             <input type="button" Value="Clear" onClick="clearJournal()">
             <input type="button" Value="Transfer" onClick="transferJournal()">
