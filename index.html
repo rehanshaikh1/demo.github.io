@@ -1,81 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible"
-		content="IE=edge">
-	<meta name="viewport"
-		content="width=device-width,
-				initial-scale=1.0">
-	<style>
-		.box {
-			background-color: black;
-			height: 100vh;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-		p {
-			font-size: 17px;
-			align-items: center;
-		}
-		.box a {
-			display: inline-block;
-			background-color: #fff;
-			padding: 15px;
-			border-radius: 3px;
-		}
-		.modal {
-			align-items: center;
-			display: flex;
-			justify-content: center;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			background: rgba(254, 126, 126, 0.7);
-			transition: all 0.4s;
-			visibility: hidden;
-			opacity: 0;
-		}
-		.content {
-			position: absolute;
-			background: white;
-			width: 400px;
-			padding: 1em 2em;
-			border-radius: 4px;
-		}
-		.modal:target {
-			visibility: visible;
-			opacity: 1;
-		}
-		.box-close {
-			position: absolute;
-			top: 0;
-			right: 15px;
-			color: #fe0606;
-			text-decoration: none;
-			font-size: 30px;
-		}
-	</style>
-</head>
+<html lang="da">
+  <head>
+        <meta charset="utf-8">
+        <title>Skovsted Consulting - Scanner App</title>
+        <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
-<body>
-	<div class="box">
-		
-	</div>
-	<div id="popup-box" class="modal">
-		<div class="content">
-			
-				<p>Never Give Up !</p>
-			<a href="#"
-			class="box-close">
-				×
-			</a>
-		</div>
-	</div>
-</body>
+    </head>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&display=swap');
+        body{
+            margin: 0;
+            font-family: 'Heebo', sans-serif;
 
+        }
+        .content-div{
+            padding: 20px;
+        }
+        .header{
+            display: flex;
+             background-color: #D2E9E9;
+             padding-right: 30px;
+             align-items:center;
+        }
+        .header img{
+            width: 200px;
+        }
+        .header h1{
+            margin-left: auto;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 40px;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+
+        }
+        table tr td{
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 25px;
+        }
+        table tr.thd{
+            font-weight: bold;
+        }
+        .scanner-div #ean{
+    display: block;
+    padding: .75rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    width: 250px;
+        }
+        label{
+            font-size: 20px;
+        }
+        table input[type='number']{
+    display: block;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin: 0 auto;
+        }
+       
+        table input[value='Delete']{
+            padding: 10px 20px;
+            background-color: #D0312D;
+            color: #fff;
+            border: 0;
+            border-radius: 5px;
+            font-size: 23px;
+        }
+        form input[type='button']{
+            padding: 10px 20px;
+            background-color: #4956ac;
+            color: #fff;
+            border: 0;
+            border-radius: 5px;
+                        font-size: 23px;
+
+        }
+    </style>
+    <body>
+        <!-- Render InvItems -->
+        <script>
+            var items = JSON.parse("[{\"Name\": \"Varenavn 0\", \"EAN\": \"9788776920586\", \"Price\": 49.95}, {\"Name\": \"Varenavn 1\", \"EAN\": \"978877692058\", \"Price\": 49.95}, {\"Name\": \"Varenavn 2\", \"EAN\": \"3020120022314\", \"Price\": 500}]");
+        </script>
+        <div class="header">
+             <img src="newlogo.png" alt="Logo">
+            <h1>Skovsted Consulting - Scanner App</h1>
+        </div>
+
+        <!-- https://scanapp.org/html5-qrcode-docs/docs/intro#documentation -->
+        <div class="content-div">
+        <div id="reader"></div>
+
+        <div class="scanner-div">
+            <input id="ean"  type="text" placeholder="Enter barcode" autofocus onchange="gotBarcode(this)"><br>
+            
+            <div class="turn-on">
+                <label for="scannerOn">Turn on scanner:</label>
+                <input type="checkbox" id="scannerOn" name="scannerOn" onchange="scannerOn(this)">
+            </div>
+        </div>
+
+        <div id="error"></div> <!--"Sorry, your browser does not support Web Storage..." -->
+
+        <table id="journal" border="1">
+            <tr class="thd">
+                <td>Name</td>
+                <td>EAN</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Actions</td>
+            </tr>
+        </table>
+
+        <form>
+            <input type="button" Value="Clear" onClick="clearJournal()">
+            <input type="button" Value="Transfer" onClick="transferJournal()">
+            <br><br>
+            <input type="button" Value="Insert Test Row" onClick="insertTestRow()">
+        </form>
+        </div>
+        <script>
+            function scannerOn(element){
+                if (element.checked==false){
+                    console.log("False");
+                    //document.getElementById("reader").style.display = "none";
+
+                    html5QrCode.stop().then((ignore) => {
+                      console.log("Stop");// QR Code scanning is stopped.
+                    }).catch((err) => {
+                        console.log("Error");
+                      // Stop failed, handle it.
+                    });
+                }
+                else {
+                    // If you want to prefer front camera
+                    html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+                }
+            }
+        </script>
+        <script src="index.js"></script>
+    </body>
 </html>
