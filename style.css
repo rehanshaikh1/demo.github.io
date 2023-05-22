@@ -7,13 +7,13 @@
 }
 @font-face {
     font-family: billy;
-    src: url('../fonts/BillyBold.otf');
+    src: url('BillyBold.otf');
 }
   
 .header-image {
     width: 100%;
     height: 80vh;
-    background-image: url('../images/LawnIsLava_Sketches_v7D.png');
+    background-image: url('LawnIsLava_Sketches_v7D.png');
     background-size: cover;
     background-position: center;
 }
