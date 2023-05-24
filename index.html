@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Heading and Paragraphs</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  <style>
+    #output {
+      margin-top: 20px;
+    }
+    
+  </style>
+</head>
+<body>
+  <h1>Add Heading and Paragraphs</h1>
+  
+  <form id="myForm">
+    <label for="headingInput">Heading:</label>
+    <input type="text" id="headingInput">
+    
+    <label for="paragraphInput">Paragraph:</label>
+    <textarea id="paragraphInput"></textarea>
+    
+    <button type="button" onclick="addContent()">Add</button>
+    <button type="button" onclick="generatePDF()">Generate PDF</button>
+  </form>
+  
+  <div id="output"></div>
+  
+  <script>
+    window.jsPDF = window.jspdf.jsPDF;
+
+    let content = []; // Track the content for PDF generation
+    
+    function addContent() {
+      var heading = document.getElementById('headingInput').value;
+      var paragraph = document.getElementById('paragraphInput').value;
+
+      var outputDiv = document.getElementById('output');
+
+      // Create a new object to store heading and paragraphs together
+      var contentItem = { text: [] };
+
+      // Create heading element if heading is entered
+      if (heading !== '') {
+        var headingElement = document.createElement('h2');
+        headingElement.textContent = heading;
+        outputDiv.appendChild(headingElement);
+
+        // Add heading to content item
+        contentItem.text.push({ text: heading, style: 'heading' });
+      }
+
+      // Create paragraph element if paragraph is entered
+      if (paragraph !== '') {
+        var paragraphElement = document.createElement('p');
+
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        paragraphElement.appendChild(checkbox);
+
+        var paragraphText = document.createElement('span');
+        paragraphText.textContent = paragraph;
+        paragraphElement.appendChild(paragraphText);
+
+        outputDiv.appendChild(paragraphElement);
+
+        // Add paragraph to content item
+        contentItem.text.push({ text: paragraph, checkbox: checkbox });
+      }
+
+      // Add content item to the content array
+      if (contentItem.text.length > 0) {
+        content.push(contentItem);
+      }
+
+      // Clear input fields
+      document.getElementById('headingInput').value = '';
+      document.getElementById('paragraphInput').value = '';
+    }
+
+    function generatePDF() {
+      var doc = new jsPDF();
+      
+      var yOffset = 10;
+      
+      content.forEach(function(contentItem, index) {
+        var hasCheckedParagraph = false; // Track if any checked paragraph is present in the current content item
+        
+        if (contentItem.text[0].style === 'heading') {
+          doc.setFontSize(16);
+          doc.setFont('helvetica', 'bold');
+          doc.text(contentItem.text[0].text, 10, yOffset);
+          yOffset += 10;
+        }
+        
+        for (var i = 1; i < contentItem.text.length; i++) {
+          var item = contentItem.text[i];
+          if (item.checkbox && item.checkbox.checked){
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'normal');
+            doc.text(item.text, 10, yOffset);
+            yOffset += 1;
+            hasCheckedParagraph = true;
+          }
+        }
+
+        if (index < content.length - 1 && hasCheckedParagraph) {
+          yOffset += 10; // Add extra spacing between content items
+        }
+      });
+
+      doc.save('output.pdf');
+    }
+  </script>
+</body>
+</html>
