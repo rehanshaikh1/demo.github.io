@@ -21,6 +21,7 @@
 
     <button type="button" onclick="addContent()">Add</button>
     <button type="button" onclick="generatePDF()">Generate PDF</button>
+    <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
   </form>
 
   <div id="output"></div>
@@ -29,6 +30,7 @@
     window.jsPDF = window.jspdf.jsPDF;
 
     let content = []; // Track the content for PDF generation
+    let currentDiv = null; // Track the current div being created
 
     function addContent() {
       var heading = document.getElementById('headingInput').value;
@@ -41,6 +43,10 @@
 
       // Create heading element if heading is entered
       if (heading !== '') {
+        // Create a new div for each heading and its corresponding paragraphs
+        currentDiv = document.createElement('div');
+        outputDiv.appendChild(currentDiv);
+
         var headingElement = document.createElement('h2');
 
         var headingCheckbox = document.createElement('input');
@@ -51,7 +57,8 @@
         headingText.textContent = heading;
         headingElement.appendChild(headingText);
 
-        outputDiv.appendChild(headingElement);
+        // Add heading to the current div
+        currentDiv.appendChild(headingElement);
 
         // Add heading to content item
         contentItem.text.push({ text: heading, style: 'heading', checkbox: headingCheckbox });
@@ -69,7 +76,8 @@
         paragraphText.textContent = paragraph;
         paragraphElement.appendChild(paragraphText);
 
-        outputDiv.appendChild(paragraphElement);
+        // Add the paragraph to the current div
+        currentDiv.appendChild(paragraphElement);
 
         // Add paragraph to content item
         contentItem.text.push({ text: paragraph, checkbox: checkbox });
@@ -114,6 +122,29 @@
       });
 
       doc.save('output.pdf');
+    }
+
+    function copyToClipboard() {
+      var checkedContent = [];
+
+      content.forEach(function(contentItem) {
+        var checkedParagraphs = contentItem.text.filter(function(item) {
+          return item.checkbox && item.checkbox.checked;
+        });
+
+        checkedParagraphs.forEach(function(checkedParagraph) {
+          checkedContent.push(checkedParagraph.text);
+        });
+      });
+
+      var textarea = document.createElement('textarea');
+      textarea.value = checkedContent.join('\n');
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+
+      alert('Checked content has been copied to the clipboard.');
     }
   </script>
 </body>
