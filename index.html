@@ -31,85 +31,102 @@
     let content = []; // Track the content for PDF generation
     
     function addContent() {
-      var heading = document.getElementById('headingInput').value;
-      var paragraph = document.getElementById('paragraphInput').value;
+  var heading = document.getElementById('headingInput').value;
+  var paragraph = document.getElementById('paragraphInput').value;
 
-      var outputDiv = document.getElementById('output');
+  var outputDiv = document.getElementById('output');
 
-      // Create a new object to store heading and paragraphs together
-      var contentItem = { text: [] };
+  // Create a new object to store heading and paragraphs together
+  var contentItem = { text: [] };
 
-      // Create heading element if heading is entered
-      if (heading !== '') {
-        var headingElement = document.createElement('h2');
-        headingElement.textContent = heading;
-        outputDiv.appendChild(headingElement);
+  // Create heading element if heading is entered
+  if (heading !== '') {
+    var headingElement = document.createElement('h2');
+    headingElement.textContent = heading;
+    outputDiv.appendChild(headingElement);
 
-        // Add heading to content item
-        contentItem.text.push({ text: heading, style: 'heading' });
-      }
+    // Add heading to content item
+    contentItem.text.push({ text: heading, style: 'heading' });
+  }
 
-      // Create paragraph element if paragraph is entered
-      if (paragraph !== '') {
-        var paragraphElement = document.createElement('p');
+  // Create paragraph element if paragraph is entered
+  if (paragraph !== '') {
+    var paragraphElement = document.createElement('p');
 
-        var checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        paragraphElement.appendChild(checkbox);
+    var checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    paragraphElement.appendChild(checkbox);
 
-        var paragraphText = document.createElement('span');
-        paragraphText.textContent = paragraph;
-        paragraphElement.appendChild(paragraphText);
+    var paragraphText = document.createElement('span');
+    paragraphText.textContent = paragraph;
+    paragraphElement.appendChild(paragraphText);
 
-        outputDiv.appendChild(paragraphElement);
+    outputDiv.appendChild(paragraphElement);
 
-        // Add paragraph to content item
-        contentItem.text.push({ text: paragraph, checkbox: checkbox });
-      }
+    // Add paragraph to content item
+    contentItem.text.push({ text: paragraph, checkbox: checkbox });
+  }
 
-      // Add content item to the content array
-      if (contentItem.text.length > 0) {
-        content.push(contentItem);
-      }
+  // Add content item to the content array
+  if (contentItem.text.length > 0) {
+    content.push(contentItem);
+  }
 
-      // Clear input fields
-      document.getElementById('headingInput').value = '';
-      document.getElementById('paragraphInput').value = '';
-    }
+  // Clear input fields
+  document.getElementById('headingInput').value = '';
+  document.getElementById('paragraphInput').value = '';
+}
 
-    function generatePDF() {
-      var doc = new jsPDF();
-      
-      var yOffset = 10;
-      
-      content.forEach(function(contentItem, index) {
-        var hasCheckedParagraph = false; // Track if any checked paragraph is present in the current content item
-        
-        if (contentItem.text[0].style === 'heading') {
+function generatePDF() {
+  var doc = new jsPDF();
+  var yOffset = 10;
+  var isFirstParagraph = true; // Track if the current paragraph is the first one
+
+  content.forEach(function(contentItem, index) {
+    var hasCheckedParagraph = false; // Track if any checked paragraph is present in the current content item
+
+    contentItem.text.forEach(function(item) {
+      if (item.style === 'heading') {
+        // Display the heading only if it is the first paragraph or there are checked paragraphs
+        if (isFirstParagraph || hasCheckedParagraph) {
           doc.setFontSize(16);
           doc.setFont('helvetica', 'bold');
-          doc.text(contentItem.text[0].text, 10, yOffset);
+          doc.text(item.text, 10, yOffset);
           yOffset += 10;
         }
-        
-        for (var i = 1; i < contentItem.text.length; i++) {
-          var item = contentItem.text[i];
-          if (item.checkbox && item.checkbox.checked){
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'normal');
-            doc.text(item.text, 10, yOffset);
-            yOffset += 1;
+      } else {
+        if (item.checkbox && item.checkbox.checked) { // Include only checked paragraphs
+          if (!hasCheckedParagraph) {
+            // Display the heading if the first checked paragraph is encountered
+            isFirstParagraph = false;
             hasCheckedParagraph = true;
           }
-        }
 
-        if (index < content.length - 1 && hasCheckedParagraph) {
-          yOffset += 10; // Add extra spacing between content items
+          doc.setFontSize(12);
+          doc.setFont('helvetica', 'normal');
+          doc.text(item.text, 10, yOffset);
+          yOffset += 1;
         }
-      });
+      }
+    });
 
-      doc.save('output.pdf');
+    if (index < content.length - 1 && hasCheckedParagraph) {
+      yOffset += 10; // Add extra spacing between content items
     }
+
+    isFirstParagraph = true; // Reset isFirstParagraph for the next content item
+  });
+
+  doc.save('output.pdf');
+}
+
+
+
+
+
+
+
+
   </script>
 </body>
 </html>
