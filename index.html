@@ -22,12 +22,27 @@
     <button type="button" onclick="addContent()">Add</button>
     <button type="button" onclick="generatePDF()">Generate PDF</button>
     <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
-  </form>
+  </form><br>
+<form id="myForm">
+  <!-- Existing code -->
 
+  <button type="button" onclick="uncheckAll()">Clear All Selections</button>
+</form>
   <div id="output"></div>
 
   <script>
     window.jsPDF = window.jspdf.jsPDF;
+function uncheckAll() {
+  content.forEach(function(contentItem) {
+    contentItem.text.forEach(function(item) {
+      if (item.checkbox && item.checkbox.checked) {
+        item.checkbox.checked = false;
+      }
+    });
+  });
+
+  alert('All checkboxes have been unchecked.');
+}
 
     let content = []; // Track the content for PDF generation
     let currentDiv = null; // Track the current div being created
