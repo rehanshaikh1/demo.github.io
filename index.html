@@ -1,165 +1,163 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Add Heading and Paragraphs</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <style>
-    #output {
-      margin-top: 20px;
-    }
-  </style>
+  <title>PDF Manipulation</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.15.0/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-  <h1>Add Heading and Paragraphs</h1>
+  <h1>PDF Manipulation</h1>
 
-  <form id="myForm">
-    <label for="headingInput">Heading:</label>
-    <input type="text" id="headingInput">
+  <h2>Merge PDFs</h2>
+  <input type="file" id="mergeInput" multiple>
+  <button onclick="mergePDFs()">Merge</button>
 
-    <label for="paragraphInput">Paragraph:</label>
-    <textarea id="paragraphInput"></textarea>
+  <h2>Split PDF</h2>
+  <input type="file" id="splitInput">
+  <input type="number" id="splitPageNum" placeholder="Page number">
+  <button onclick="splitPDF()">Split</button>
 
-    <button type="button" onclick="addContent()">Add</button>
-    <button type="button" onclick="generatePDF()">Generate PDF</button>
-    <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
-  </form><br>
-<form id="myForm">
-  <!-- Existing code -->
+  <h2>Extract Pages</h2>
+  <input type="file" id="extractInput">
+  <input type="number" id="extractStartPage" placeholder="Start page">
+  <input type="number" id="extractEndPage" placeholder="End page">
+  <button onclick="extractPages()">Extract</button>
 
-  <button type="button" onclick="uncheckAll()">Clear All Selections</button>
-</form>
-  <div id="output"></div>
+  <h2>Rearrange Pages</h2>
+  <input type="file" id="rearrangeInput">
+  <input type="text" id="rearrangeOrder" placeholder="Page order (comma-separated)">
+  <button onclick="rearrangePages()">Rearrange</button>
+
+  <h2>Create Group PDFs</h2>
+  <input type="file" id="groupInput">
+  <input type="number" id="groupPageSize" placeholder="Number of pages per group">
+  <button onclick="createGroupPDFs()">Create</button>
 
   <script>
-    window.jsPDF = window.jspdf.jsPDF;
-function uncheckAll() {
-  content.forEach(function(contentItem) {
-    contentItem.text.forEach(function(item) {
-      if (item.checkbox && item.checkbox.checked) {
-        item.checkbox.checked = false;
-      }
-    });
-  });
+    // Function to merge multiple PDF files
+    function mergePDFs() {
+      const inputFiles = document.getElementById('mergeInput').files;
+      const mergedPDF = await PDFLib.PDFDocument.create();
 
-  alert('All checkboxes have been unchecked.');
-}
+      for (const file of inputFiles) {
+        const fileData = await file.arrayBuffer();
+        const pdfDoc = await PDFLib.PDFDocument.load(fileData);
+        const pageCount = pdfDoc.getPageCount();
 
-    let content = []; // Track the content for PDF generation
-    let currentDiv = null; // Track the current div being created
-
-    function addContent() {
-      var heading = document.getElementById('headingInput').value;
-      var paragraph = document.getElementById('paragraphInput').value;
-
-      var outputDiv = document.getElementById('output');
-
-      // Create a new object to store heading and paragraphs together
-      var contentItem = { text: [] };
-
-      // Create heading element if heading is entered
-      if (heading !== '') {
-        // Create a new div for each heading and its corresponding paragraphs
-        currentDiv = document.createElement('div');
-        outputDiv.appendChild(currentDiv);
-
-        var headingElement = document.createElement('h2');
-
-        var headingCheckbox = document.createElement('input');
-        headingCheckbox.type = 'checkbox';
-        headingElement.appendChild(headingCheckbox);
-
-        var headingText = document.createElement('span');
-        headingText.textContent = heading;
-        headingElement.appendChild(headingText);
-
-        // Add heading to the current div
-        currentDiv.appendChild(headingElement);
-
-        // Add heading to content item
-        contentItem.text.push({ text: heading, style: 'heading', checkbox: headingCheckbox });
-      }
-
-      // Create paragraph element if paragraph is entered
-      if (paragraph !== '') {
-        var paragraphElement = document.createElement('p');
-
-        var checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        paragraphElement.appendChild(checkbox);
-
-        var paragraphText = document.createElement('span');
-        paragraphText.textContent = paragraph;
-        paragraphElement.appendChild(paragraphText);
-
-        // Add the paragraph to the current div
-        currentDiv.appendChild(paragraphElement);
-
-        // Add paragraph to content item
-        contentItem.text.push({ text: paragraph, checkbox: checkbox });
-      }
-
-      // Add content item to the content array
-      if (contentItem.text.length > 0) {
-        content.push(contentItem);
-      }
-
-      // Clear input fields
-      document.getElementById('headingInput').value = '';
-      document.getElementById('paragraphInput').value = '';
-    }
-
-    function generatePDF() {
-      var doc = new jsPDF();
-
-      var yOffset = 10;
-
-      content.forEach(function(contentItem, index) {
-        var hasCheckedParagraph = false; // Track if any checked paragraph is present in the current content item
-
-        contentItem.text.forEach(function(item) {
-          if (item.style === 'heading' && item.checkbox && item.checkbox.checked) {
-            doc.setFontSize(16);
-            doc.setFont('helvetica', 'bold');
-            doc.text(item.text, 10, yOffset);
-            yOffset += 10;
-          } else if (item.checkbox && item.checkbox.checked) { // Include only checked paragraphs
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'normal');
-            doc.text(item.text, 10, yOffset);
-            yOffset += 1;
-            hasCheckedParagraph = true;
-          }
-        });
-
-        if (index < content.length - 1 && hasCheckedParagraph) {
-          yOffset += 10; // Add extra spacing between content items
+        for (let pageNum = 0; pageNum < pageCount; pageNum++) {
+          const [copiedPage] = await mergedPDF.copyPages(pdfDoc, [pageNum]);
+          mergedPDF.addPage(copiedPage);
         }
-      });
+      }
 
-      doc.save('output.pdf');
+      const mergedData = await mergedPDF.save();
+      downloadFile(mergedData, 'merged.pdf');
     }
 
-    function copyToClipboard() {
-      var checkedContent = [];
+    // Function to split a PDF at a specified page
+    function splitPDF() {
+      const inputFile = document.getElementById('splitInput').files[0];
+      const splitPageNum = parseInt(document.getElementById('splitPageNum').value);
 
-      content.forEach(function(contentItem) {
-        var checkedParagraphs = contentItem.text.filter(function(item) {
-          return item.checkbox && item.checkbox.checked;
-        });
+      const fileData = await inputFile.arrayBuffer();
+      const pdfDoc = await PDFLib.PDFDocument.load(fileData);
 
-        checkedParagraphs.forEach(function(checkedParagraph) {
-          checkedContent.push(checkedParagraph.text);
-        });
-      });
+      const firstPDF = await PDFLib.PDFDocument.create();
+      const secondPDF = await PDFLib.PDFDocument.create();
 
-      var textarea = document.createElement('textarea');
-      textarea.value = checkedContent.join('\n');
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
+      const pageCount = pdfDoc.getPageCount();
+      for (let pageNum = 0; pageNum < pageCount; pageNum++) {
+        const [copiedPage] = await firstPDF.copyPages(pdfDoc, [pageNum]);
+        if (pageNum < splitPageNum) {
+          firstPDF.addPage(copiedPage);
+        } else {
+          secondPDF.addPage(copiedPage);
+        }
+      }
 
-      alert('Checked content has been copied to the clipboard.');
+      const firstData = await firstPDF.save();
+      const secondData = await secondPDF.save();
+
+      downloadFile(firstData, 'first.pdf');
+      downloadFile(secondData, 'second.pdf');
+    }
+
+    // Function to extract specified pages from a PDF
+    function extractPages() {
+      const inputFile = document.getElementById('extractInput').files[0];
+      const startPage = parseInt(document.getElementById('extractStartPage').value);
+      const endPage = parseInt(document.getElementById('extractEndPage').value);
+
+      const fileData = await inputFile.arrayBuffer();
+      const pdfDoc = await PDFLib.PDFDocument.load(fileData);
+
+      const extractedPDF = await PDFLib.PDFDocument.create();
+
+      const pageCount = pdfDoc.getPageCount();
+      for (let pageNum = startPage - 1; pageNum <= endPage - 1 && pageNum < pageCount; pageNum++) {
+        const [copiedPage] = await extractedPDF.copyPages(pdfDoc, [pageNum]);
+        extractedPDF.addPage(copiedPage);
+      }
+
+      const extractedData = await extractedPDF.save();
+      downloadFile(extractedData, 'extracted.pdf');
+    }
+
+    // Function to rearrange pages in a PDF
+    function rearrangePages() {
+      const inputFile = document.getElementById('rearrangeInput').files[0];
+      const pageOrder = document.getElementById('rearrangeOrder').value.split(',');
+
+      const fileData = await inputFile.arrayBuffer();
+      const pdfDoc = await PDFLib.PDFDocument.load(fileData);
+
+      const rearrangedPDF = await PDFLib.PDFDocument.create();
+
+      for (const pageNum of pageOrder) {
+        const intPageNum = parseInt(pageNum);
+        if (intPageNum > 0 && intPageNum <= pdfDoc.getPageCount()) {
+          const [copiedPage] = await rearrangedPDF.copyPages(pdfDoc, [intPageNum - 1]);
+          rearrangedPDF.addPage(copiedPage);
+        }
+      }
+
+      const rearrangedData = await rearrangedPDF.save();
+      downloadFile(rearrangedData, 'rearranged.pdf');
+    }
+
+    // Function to create group PDFs with a specified number of pages per group
+    function createGroupPDFs() {
+      const inputFile = document.getElementById('groupInput').files[0];
+      const pageSize = parseInt(document.getElementById('groupPageSize').value);
+
+      const fileData = await inputFile.arrayBuffer();
+      const pdfDoc = await PDFLib.PDFDocument.load(fileData);
+
+      const pageCount = pdfDoc.getPageCount();
+      const numGroups = Math.ceil(pageCount / pageSize);
+
+      for (let groupNum = 0; groupNum < numGroups; groupNum++) {
+        const groupPDF = await PDFLib.PDFDocument.create();
+        const startPage = groupNum * pageSize;
+        const endPage = Math.min((groupNum + 1) * pageSize, pageCount);
+
+        for (let pageNum = startPage; pageNum < endPage; pageNum++) {
+          const [copiedPage] = await groupPDF.copyPages(pdfDoc, [pageNum]);
+          groupPDF.addPage(copiedPage);
+        }
+
+        const groupData = await groupPDF.save();
+        downloadFile(groupData, `group_${groupNum + 1}.pdf`);
+      }
+    }
+
+    // Function to download a file
+    function downloadFile(data, fileName) {
+      const blob = new Blob([data], { type: 'application/pdf' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
     }
   </script>
 </body>
