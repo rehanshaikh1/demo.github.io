@@ -2,163 +2,239 @@
 <html>
 <head>
   <title>PDF Manipulation</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.15.0/pdf-lib.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" integrity="sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script></head>
 <body>
   <h1>PDF Manipulation</h1>
 
-  <h2>Merge PDFs</h2>
-  <input type="file" id="mergeInput" multiple>
-  <button onclick="mergePDFs()">Merge</button>
-
-  <h2>Split PDF</h2>
-  <input type="file" id="splitInput">
-  <input type="number" id="splitPageNum" placeholder="Page number">
-  <button onclick="splitPDF()">Split</button>
-
-  <h2>Extract Pages</h2>
-  <input type="file" id="extractInput">
-  <input type="number" id="extractStartPage" placeholder="Start page">
-  <input type="number" id="extractEndPage" placeholder="End page">
-  <button onclick="extractPages()">Extract</button>
-
-  <h2>Rearrange Pages</h2>
-  <input type="file" id="rearrangeInput">
-  <input type="text" id="rearrangeOrder" placeholder="Page order (comma-separated)">
-  <button onclick="rearrangePages()">Rearrange</button>
-
-  <h2>Create Group PDFs</h2>
-  <input type="file" id="groupInput">
-  <input type="number" id="groupPageSize" placeholder="Number of pages per group">
-  <button onclick="createGroupPDFs()">Create</button>
+  <input type="file" id="inputFiles" multiple>
+  <button onclick="mergePDFs()">Merge PDFs</button>
+  <button onclick="splitPDFs()">Split PDFs</button>
+  <button onclick="extractPages()">Extract Pages</button>
+  <button onclick="rearrangePages()">Rearrange Pages</button>
+  <button onclick="createGroupPDFs()">Create Group PDFs</button>
 
   <script>
-    // Function to merge multiple PDF files
-    function mergePDFs() {
-      const inputFiles = document.getElementById('mergeInput').files;
+    async function mergePDFs() {
+      const inputFiles = document.getElementById('inputFiles').files;
       const mergedPDF = await PDFLib.PDFDocument.create();
 
       for (const file of inputFiles) {
-        const fileData = await file.arrayBuffer();
-        const pdfDoc = await PDFLib.PDFDocument.load(fileData);
-        const pageCount = pdfDoc.getPageCount();
+        const reader = new FileReader();
 
-        for (let pageNum = 0; pageNum < pageCount; pageNum++) {
-          const [copiedPage] = await mergedPDF.copyPages(pdfDoc, [pageNum]);
-          mergedPDF.addPage(copiedPage);
+        reader.onload = async function() {
+          const pdfBytes = new Uint8Array(reader.result);
+          const pdf = await PDFLib.PDFDocument.load(pdfBytes);
+          const pages = await mergedPDF.copyPages(pdf, pdf.getPageIndices());
+
+          pages.forEach((page) => {
+            mergedPDF.addPage(page);
+          });
+
+          if (file === inputFiles[inputFiles.length - 1]) {
+            const mergedPdfBytes = await mergedPDF.save();
+            downloadPDF(mergedPdfBytes, 'merged.pdf');
+          }
+        };
+
+        reader.readAsArrayBuffer(file);
+      }
+    }
+
+    async function splitPDFs() {
+      const inputFiles = document.getElementById('inputFiles').files;
+
+      for (const file of inputFiles) {
+        const reader = new FileReader();
+
+        reader.onload = async function() {
+          const pdfBytes = new Uint8Array(reader.result);
+          const pdf = await PDFLib.PDFDocument.load(pdfBytes);
+          const pageCount = pdf.getPageCount();
+
+          for (let i = 0; i < pageCount; i++) {
+            const newPDF = await PDFLib.PDFDocument.create();
+            const [copiedPage] = await newPDF.copyPages(pdf, [i]);
+            newPDF.addPage(copiedPage);
+
+            const splitPdfBytes = await newPDF.save();
+            const filename = `split_page_${i + 1}.pdf`;
+            downloadPDF(splitPdfBytes, filename);
+          }
+        };
+
+        reader.readAsArrayBuffer(file);
+      }
+    }
+
+    async function extractPages() {
+      const inputFiles = document.getElementById('inputFiles').files;
+
+      for (const file of inputFiles) {
+        const reader = new FileReader();
+
+        reader.onload = async function() {
+          const pdfBytes = new Uint8Array(reader.result);
+          const pdf = await PDFLib.PDFDocument.load(pdfBytes);
+          const pageCount = pdf.getPageCount();
+
+          const startPage = parseInt(prompt('Enter the start page number:'));
+          const endPage = parseInt(prompt('Enter the end page number:'));
+
+          if (isNaN(startPage) || isNaN(endPage) || startPage < 1 || endPage > pageCount || startPage > endPage) {
+            alert('Invalid page numbers!');
+            return;
+          }
+
+          const newPDF = await PDFLib.PDFDocument.create();
+
+          for (let i = startPage - 1; i < endPage; i++) {
+            const [copiedPage] = await newPDF.copyPages(pdf, [i]);
+            newPDF.addPage(copiedPage);
+          }
+
+         
+          const extractedPdfBytes = await newPDF.save();
+          const filename = 'extracted_pages_${startPage}_to_${endPage}.pdf';
+          downloadPDF(extractedPdfBytes, filename);
+          };
+              reader.readAsArrayBuffer(file);
+  }
+}
+
+async function rearrangePages() {
+  const inputFiles = document.getElementById('inputFiles').files;
+
+  for (const file of inputFiles) {
+    const reader = new FileReader();
+
+    reader.onload = async function() {
+      const pdfBytes = new Uint8Array(reader.result);
+      const pdf = await PDFLib.PDFDocument.load(pdfBytes);
+      const pageCount = pdf.getPageCount();
+
+      const order = prompt('Enter the new page order (comma-separated numbers):');
+      const pageIndexes = order.split(',').map(num => parseInt(num.trim()));
+
+      if (!isValidPageOrder(pageIndexes, pageCount)) {
+        alert('Invalid page order!');
+        return;
+      }
+
+      const newPDF = await PDFLib.PDFDocument.create();
+
+      for (const pageIndex of pageIndexes) {
+        if (pageIndex < 1 || pageIndex > pageCount) {
+          continue;
+        }
+
+        const [copiedPage] = await newPDF.copyPages(pdf, [pageIndex - 1]);
+        newPDF.addPage(copiedPage);
+      }
+
+      const rearrangedPdfBytes = await newPDF.save();
+      const filename = `rearranged_pages.pdf`;
+      downloadPDF(rearrangedPdfBytes, filename);
+    };
+
+    reader.readAsArrayBuffer(file);
+  }
+}
+
+async function createGroupPDFs() {
+  const inputFiles = document.getElementById('inputFiles').files;
+
+  const groups = prompt('Enter the group numbers for each PDF (comma-separated numbers):');
+  const groupNumbers = groups.split(',').map(num => parseInt(num.trim()));
+
+  if (!isValidGroupNumbers(groupNumbers, inputFiles.length)) {
+    alert('Invalid group numbers!');
+    return;
+  }
+
+  const groupedPDFs = {};
+
+  for (let i = 0; i < inputFiles.length; i++) {
+    const file = inputFiles[i];
+    const groupNumber = groupNumbers[i];
+
+    if (!groupedPDFs[groupNumber]) {
+      groupedPDFs[groupNumber] = await PDFLib.PDFDocument.create();
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = async function() {
+      const pdfBytes = new Uint8Array(reader.result);
+      const pdf = await PDFLib.PDFDocument.load(pdfBytes);
+      const pages = await groupedPDFs[groupNumber].copyPages(pdf, pdf.getPageIndices());
+
+      pages.forEach((page) => {
+        groupedPDFs[groupNumber].addPage(page);
+      });
+
+      if (i === inputFiles.length - 1) {
+        for (const groupNumber in groupedPDFs) {
+          const groupPdfBytes = await groupedPDFs[groupNumber].save();
+          const filename = `group_${groupNumber}.pdf`;
+          downloadPDF(groupPdfBytes, filename);
         }
       }
+    };
 
-      const mergedData = await mergedPDF.save();
-      downloadFile(mergedData, 'merged.pdf');
+    reader.readAsArrayBuffer(file);
+  }
+}
+
+function downloadPDF(data, filename) {
+  const a = document.createElement('a');
+  const blob = new Blob([data], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+
+  setTimeout(function() {
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }, 0);
+}
+
+function isValidPageOrder(pageIndexes, pageCount) {
+  if (pageIndexes.length !== pageCount) {
+    return false;
+  }
+
+  const visited = new Set();
+
+  for (const index of pageIndexes) {
+    if (!Number.isInteger(index) || index < 1 || index > pageCount || visited.has(index)) {
+return false;
+}
+    visited.add(index);
+  }
+
+  return true;
+}
+
+function isValidGroupNumbers(groupNumbers, fileCount) {
+  if (groupNumbers.length !== fileCount) {
+    return false;
+  }
+
+  const visited = new Set();
+
+  for (const number of groupNumbers) {
+    if (!Number.isInteger(number) || number < 1 || visited.has(number)) {
+      return false;
     }
 
-    // Function to split a PDF at a specified page
-    function splitPDF() {
-      const inputFile = document.getElementById('splitInput').files[0];
-      const splitPageNum = parseInt(document.getElementById('splitPageNum').value);
+    visited.add(number);
+  }
 
-      const fileData = await inputFile.arrayBuffer();
-      const pdfDoc = await PDFLib.PDFDocument.load(fileData);
-
-      const firstPDF = await PDFLib.PDFDocument.create();
-      const secondPDF = await PDFLib.PDFDocument.create();
-
-      const pageCount = pdfDoc.getPageCount();
-      for (let pageNum = 0; pageNum < pageCount; pageNum++) {
-        const [copiedPage] = await firstPDF.copyPages(pdfDoc, [pageNum]);
-        if (pageNum < splitPageNum) {
-          firstPDF.addPage(copiedPage);
-        } else {
-          secondPDF.addPage(copiedPage);
-        }
-      }
-
-      const firstData = await firstPDF.save();
-      const secondData = await secondPDF.save();
-
-      downloadFile(firstData, 'first.pdf');
-      downloadFile(secondData, 'second.pdf');
-    }
-
-    // Function to extract specified pages from a PDF
-    function extractPages() {
-      const inputFile = document.getElementById('extractInput').files[0];
-      const startPage = parseInt(document.getElementById('extractStartPage').value);
-      const endPage = parseInt(document.getElementById('extractEndPage').value);
-
-      const fileData = await inputFile.arrayBuffer();
-      const pdfDoc = await PDFLib.PDFDocument.load(fileData);
-
-      const extractedPDF = await PDFLib.PDFDocument.create();
-
-      const pageCount = pdfDoc.getPageCount();
-      for (let pageNum = startPage - 1; pageNum <= endPage - 1 && pageNum < pageCount; pageNum++) {
-        const [copiedPage] = await extractedPDF.copyPages(pdfDoc, [pageNum]);
-        extractedPDF.addPage(copiedPage);
-      }
-
-      const extractedData = await extractedPDF.save();
-      downloadFile(extractedData, 'extracted.pdf');
-    }
-
-    // Function to rearrange pages in a PDF
-    function rearrangePages() {
-      const inputFile = document.getElementById('rearrangeInput').files[0];
-      const pageOrder = document.getElementById('rearrangeOrder').value.split(',');
-
-      const fileData = await inputFile.arrayBuffer();
-      const pdfDoc = await PDFLib.PDFDocument.load(fileData);
-
-      const rearrangedPDF = await PDFLib.PDFDocument.create();
-
-      for (const pageNum of pageOrder) {
-        const intPageNum = parseInt(pageNum);
-        if (intPageNum > 0 && intPageNum <= pdfDoc.getPageCount()) {
-          const [copiedPage] = await rearrangedPDF.copyPages(pdfDoc, [intPageNum - 1]);
-          rearrangedPDF.addPage(copiedPage);
-        }
-      }
-
-      const rearrangedData = await rearrangedPDF.save();
-      downloadFile(rearrangedData, 'rearranged.pdf');
-    }
-
-    // Function to create group PDFs with a specified number of pages per group
-    function createGroupPDFs() {
-      const inputFile = document.getElementById('groupInput').files[0];
-      const pageSize = parseInt(document.getElementById('groupPageSize').value);
-
-      const fileData = await inputFile.arrayBuffer();
-      const pdfDoc = await PDFLib.PDFDocument.load(fileData);
-
-      const pageCount = pdfDoc.getPageCount();
-      const numGroups = Math.ceil(pageCount / pageSize);
-
-      for (let groupNum = 0; groupNum < numGroups; groupNum++) {
-        const groupPDF = await PDFLib.PDFDocument.create();
-        const startPage = groupNum * pageSize;
-        const endPage = Math.min((groupNum + 1) * pageSize, pageCount);
-
-        for (let pageNum = startPage; pageNum < endPage; pageNum++) {
-          const [copiedPage] = await groupPDF.copyPages(pdfDoc, [pageNum]);
-          groupPDF.addPage(copiedPage);
-        }
-
-        const groupData = await groupPDF.save();
-        downloadFile(groupData, `group_${groupNum + 1}.pdf`);
-      }
-    }
-
-    // Function to download a file
-    function downloadFile(data, fileName) {
-      const blob = new Blob([data], { type: 'application/pdf' });
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = fileName;
-      link.click();
-    }
-  </script>
+  return true;
+}
+</script>
 </body>
 </html>
