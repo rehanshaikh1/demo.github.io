@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="style.css">
     <title>Responsive Navbar</title>
 </head>
 <style type="text/css">
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 *{
     padding: 0;
@@ -22,7 +23,7 @@ body{
     font-family: arial;
     overflow: hidden;
 }
-html {
+html{
     overflow-x: hidden;
 }
 ul{
@@ -64,11 +65,11 @@ section{
 
 .nav-btn{
     display: flex;
-    flex: 2;
+    flex: 4;
 }
 
 .nav-links{
-    flex: 2;
+    flex: 4;
     margin: 50px 0;
 }
 
@@ -92,26 +93,6 @@ section{
     font-weight: 300;
 }
 
-.btn{
-    display: inline-block;
-    padding: .5rem 1.3rem;
-    font-size: .8rem;
-    border: 2px solid #FF7133;
-    border-radius: 2rem;
-    line-height: 1;
-    margin: 0 .2rem;
-    text-transform: uppercase;
-}
-
-.btn.solid, .btn.transparent:hover{
-    background-color: #FF7133;
-    color: #69bde7;
-}
-
-.btn.transparent, .btn.solid:hover{
-    background-color: transparent;
-    color: #FF7133;
-}
 
 .nav-links > ul{
     display: flex;
@@ -203,7 +184,7 @@ section{
 
 .dropdown.second{
     top: 0;
-    left: -110%;
+    left: -101%;
     padding-left: .8rem;
     cursor: pointer;
     transform: translateX(10px);
@@ -246,15 +227,6 @@ section{
     z-index: 1001;
 }
 
-.hamburger-menu div:before,
-.hamburger-menu div:after{
-    content: '';
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    background-color: #FF7133;
-    border-radius: 3px;
-}
 
 .hamburger-menu div:before{
     transform: translateY(-7px);
@@ -263,6 +235,7 @@ section{
 .hamburger-menu div:after{
     transform: translateY(7px);
 }
+
 
 #check{
     position: absolute;
@@ -301,9 +274,6 @@ section{
 }
 
 @media (max-width: 920px){
-	body{
-		overflow-x:hidden;
-	}
     .hamburger-menu-container{
         display: flex;
     }
@@ -320,28 +290,31 @@ section{
     font-weight: 700;
 }
 .dropdown a {
-	color: #333 !important;
-	font-size: 1.2rem;
-	font-weight: normal;
+    color: #333 !important;
+    font-size: 1.2rem;
+    font-weight: normal;
 }
     .nav-btn {
-	    position: absolute;
-	    height: calc(100vh - 3rem);
-	    top: 6rem;
-	    left: 0;
-	    width: 100%;
-	    flex-direction: column;
-	    align-items: center;
-	    justify-content: space-between;
-	    overflow-x: hidden;
-	    overflow-y: auto;
-	    transform: translateX(100%);
-	}
-	img.logo-img {
-	    height: 90px;
-	}
+        position: absolute;
+        height: calc(100vh - 3rem);
+        top: 6rem;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        overflow-x: hidden;
+        overflow-y: auto;
+        transform: translateX(100%);
+        visibility: hidden;
+    }
+    img.logo-img {
+        height: 90px;
+    }
     #check:checked ~ .nav-btn{
         transform: translateX(0);
+                visibility: visible;
+
     }
 
     #check:checked ~ .nav-btn .nav-link,
@@ -349,7 +322,7 @@ section{
         animation: animation .5s ease forwards var(--i);
     }
     li.nav-link {
-   	border-top: 1px solid #dcd7ca;
+    border-top: 1px solid #dcd7ca;
     border-bottom: 1px solid #dcd7ca;
 }
     .nav-links{
@@ -358,13 +331,13 @@ section{
     }
 
     .nav-links > ul {
-	    flex-direction: column;
-/*	    margin: 0px 30px;*/
-	}
+        flex-direction: column;
+/*      margin: 0px 30px;*/
+    }
 
-	.dropdown ul {
-/*	    margin: 0 30px;*/
-	}
+    .dropdown ul {
+/*      margin: 0 30px;*/
+    }
     .nav-link{
         width: 100%;
         opacity: 0;
@@ -412,9 +385,9 @@ section{
         line-height: 1;
     }
     li.dropdown-link {
-    	border-top: 1px solid #dcd7ca !important;
-	    border-bottom: 1px solid #dcd7ca !important;
-	}
+        border-top: 1px solid #dcd7ca !important;
+        border-bottom: 1px solid #dcd7ca !important;
+    }
 
     .dropdown.second .dropdown-link > a{
         padding: 1.2rem 2rem 1.2rem 3rem;
@@ -459,20 +432,13 @@ section{
         font-size: 1rem;
     }
 
-    .log-sign{
-        flex: initial;
-        width: 100%;
-        padding: 1.5rem 1.9rem;
-        justify-content: flex-start;
-        opacity: 0;
-        transform: translateY(15px);
-    }
+
 }
 </style>
 <body>
     <header>
         <div class="container">
-            <input type="checkbox" name="" id="check">
+            <input type="checkbox" name="" id="check" onclick="myFunction();">
             
             <div class="logo-container">
                <img src="https://prashnavali.net/wp-content/uploads/2020/08/cropped-logo-1-1.png" class="logo-img">
@@ -538,7 +504,7 @@ section{
                             </div>
                         </li>
                         <li class="nav-link" style="--i: 1.1s">
-                            <a href="#">Hanuman Prashnavali Online<i class="fas fa-caret-down"></i></a>
+                            <a href="#">Hanuman Prashnavali Online<i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -560,7 +526,7 @@ section{
                             </div>
                         </li>
                          <li class="nav-link" style="--i: 1.1s">
-                            <a href="#">Sai Baba Prashnavali<i class="fas fa-caret-down"></i></a>
+                            <a href="#">Sai Baba Prashnavali<i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -585,7 +551,7 @@ section{
                             </div>
                         </li>
                          <li class="nav-link" style="--i: 1.1s">
-                            <a href="#">Ganesha Prashnavali<i class="fas fa-caret-down"></i></a>
+                            <a href="#">Ganesha Prashnavali<i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -605,7 +571,7 @@ section{
                             </div>
                         </li>
                          <li class="nav-link" style="--i: 1.1s">
-                            <a href="#">Shiva Prashnavali<i class="fas fa-caret-down"></i></a>
+                            <a href="#">Shiva Prashnavali<i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -625,7 +591,7 @@ section{
                             </div>
                         </li>
                         <li class="nav-link" style="--i: 1.1s">
-                            <a href="#">Durga Prashnavali<i class="fas fa-caret-down"></i></a>
+                            <a href="#">Durga Prashnavali<i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -654,6 +620,8 @@ section{
             <div class="hamburger-menu-container">
                 <div class="hamburger-menu">
                     <div></div>
+                    <i class="fa fa-bars" id="c-icon"></i>
+
                 </div>
             </div>
         </div>
@@ -663,6 +631,23 @@ section{
             <div class="overlay"></div>
         </section>
     </main>
+    <script type="text/javascript">
+    	function myFunction() {
+
+    	var cicon = document.getElementById('c-icon');
+    	ciconcl = cicon.classList;
+    	if(ciconcl=="fa fa-bars"){
+              cicon.classList.remove("fa-bars");
+              cicon.classList.add("fa-close");
+         }
+         else {
+              cicon.classList.remove("fa-close");
+              cicon.classList.add("fa-bars");
+         }
+
+	}
+    </script>
 </body>
+
 
 </html>
