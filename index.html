@@ -49,12 +49,6 @@ section{
     width: 100%;
     overflow: hidden;
 }
-.hidediv{
-    display: none !important;
-}
-.divshown{
-    display: block !important;
-}
 
 .container{
 /*    max-width: 65rem;*/
@@ -167,7 +161,7 @@ section{
 }
 
 .dropdown-link i{
-    transform: rotate(-90deg);
+    transform: rotate(-360deg);
 }
 
 .arrow{
@@ -289,6 +283,16 @@ section{
 }
 
 @media (max-width: 920px){
+    .hamburger-menu i{
+        font-size: 25px;
+    }
+  .hidediv{
+    display: none !important;
+}
+.divshown{
+    display: block !important;
+}
+
     .hamburger-menu-container{
         display: flex;
     }
@@ -390,7 +394,7 @@ section{
     }*/
 
     #thisone{
-        transform: rotate(360deg);
+        transform: rotate(180deg);
     }
 
     .dropdown-link > a{
@@ -440,7 +444,7 @@ section{
 
     .nav-link > a > i{
         font-size: 1.1rem;
-        transform: rotate(-90deg);
+        transform: rotate(-360deg);
     }
 
     .dropdown i{
