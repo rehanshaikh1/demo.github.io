@@ -52,6 +52,9 @@ section{
 .hidediv{
     display: none !important;
 }
+.divshown{
+    display: block !important;
+}
 
 .container{
 /*    max-width: 65rem;*/
@@ -381,13 +384,12 @@ section{
         display: none;
     }
     
-    .nav-link:hover > .dropdown,
+    /*.nav-link:hover > .dropdown,
     .dropdown-link:hover > .dropdown{
         display: block;
-    }
+    }*/
 
-    .nav-link:hover > a > i,
-    .dropdown-link:hover > a > i{
+    #thisone{
         transform: rotate(360deg);
     }
 
@@ -464,7 +466,7 @@ section{
                             <a href="https://prashnavali.net/">Home</a>
                         </li>
                         <li class="nav-link" style="--i: .85s">
-                            <a href="#" class="tclass">Ramcharitmanas And Ram Prashnavali<i class="fas fa-chevron-down"></i></a>
+                            <a href="#" class="tclass">Ramcharitmanas And Ram Prashnavali<i class="fas fa-chevron-down tclass"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -483,8 +485,8 @@ section{
                                         <a href="#">Ram Shalaka Video</a>
                                     </li>
                                     <li class="dropdown-link">
-                                        <a href="#" class="func">Ramcharitmanas<i class="fas fa-chevron-down"></i></a>
-                                        <div class="dropdown second">
+                                        <a href="#" class="func tclasssecond">Ramcharitmanas<i class="fas fa-chevron-down tclasssecond dropdouble"></i></a>
+                                        <div class="dropdown second hidediv">
                                             <ul>
                                                 <li class="dropdown-link">
                                                     <a href="https://prashnavali.net/ramcharitmanas-balkand/">Bal Kand</a>
@@ -520,7 +522,7 @@ section{
                             </div>
                         </li>
                         <li class="nav-link" style="--i: 1.1s">
-                            <a href="#" class="tclass">Hanuman Prashnavali Online<i class="fas fa-chevron-down"></i></a>
+                            <a href="#" class="tclass">Hanuman Prashnavali Online<i class="fas fa-chevron-down tclass"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -542,7 +544,7 @@ section{
                             </div>
                         </li>
                          <li class="nav-link" style="--i: 1.1s">
-                            <a href="#" class="tclass">Sai Baba Prashnavali<i class="fas fa-chevron-down"></i></a>
+                            <a href="#" class="tclass">Sai Baba Prashnavali<i class="fas fa-chevron-down tclass"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -567,7 +569,7 @@ section{
                             </div>
                         </li>
                          <li class="nav-link" style="--i: 1.1s">
-                            <a href="#" class="tclass">Ganesha Prashnavali<i class="fas fa-chevron-down"></i></a>
+                            <a href="#" class="tclass">Ganesha Prashnavali<i class="fas fa-chevron-down tclass"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -587,7 +589,7 @@ section{
                             </div>
                         </li>
                          <li class="nav-link" style="--i: 1.1s">
-                            <a href="#" class="tclass">Shiva Prashnavali<i class="fas fa-chevron-down"></i></a>
+                            <a href="#" class="tclass">Shiva Prashnavali<i class="fas fa-chevron-down tclass"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -607,7 +609,7 @@ section{
                             </div>
                         </li>
                         <li class="nav-link" style="--i: 1.1s">
-                            <a href="#" class="tclass">Durga Prashnavali<i class="fas fa-chevron-down"></i></a>
+                            <a href="#" class="tclass">Durga Prashnavali<i class="fas fa-chevron-down tclass"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
@@ -667,8 +669,52 @@ section{
 var navLinks = document.getElementsByClassName("nav-link");
 
 for (var i = 0; i < navLinks.length; i++) {
-  navLinks[i].addEventListener("click", function(event) {
+ navLinks[i].addEventListener("click", function(event) {
+ 
+
     if (window.innerWidth <= 920 && event.target.classList.contains("tclass")) {
+
+
+
+    var element = document.querySelector('.tclasssecond');
+
+
+    element.addEventListener('click', function() {
+       var icond = document.querySelector('.dropdouble');
+       if (icond.getAttribute("id") === "thisone") {
+        icond.removeAttribute("id");
+        console.log("Removed 'thisone' id from closestIcon:", closestIcon);
+      } else {
+        icond.setAttribute("id", "thisone");
+        console.log("Added 'thisone' id to closestIcon:", closestIcon);
+      }
+
+
+      var nextSibling = element.nextElementSibling;
+     var nextSiblingClassList = element.nextElementSibling.classList;
+      if (nextSiblingClassList.contains("divshown")) {
+        nextSiblingClassList.remove("divshown");
+        nextSiblingClassList.add("hidediv");
+      } else {
+        nextSiblingClassList.remove("hidediv");
+        nextSiblingClassList.add("divshown");
+      }
+
+    });
+
+
+
+
+       evchild = event.target.children;
+      var closestIcon = event.target.closest("i.fas") || event.target.children[0];
+     if (closestIcon.getAttribute("id") === "thisone") {
+        closestIcon.removeAttribute("id");
+        console.log("Removed 'thisone' id from closestIcon:", closestIcon);
+      } else {
+        closestIcon.setAttribute("id", "thisone");
+        console.log("Added 'thisone' id to closestIcon:", closestIcon);
+      }
+
       var dropdownDiv = this.querySelector(".dropdown");
       var dropdownClassList = dropdownDiv.classList;
       
@@ -682,6 +728,7 @@ for (var i = 0; i < navLinks.length; i++) {
     }
   });
 }
+
 
     </script>
 
