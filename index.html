@@ -1,772 +1,1507 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <title>Pro Physio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Mulish:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
-    <title>Responsive Navbar</title>
 </head>
-<style>
-		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body{
-    font-family: arial;
-    overflow: hidden;
-}
-html{
-	overflow-x: hidden;
-}
-ul{
-    list-style: none;
-}
-
-a{
-    text-decoration: none;
-}
-.fa {
-	color: #cd2653;
-}
-header{
-    position: sticky;
-    top: 0px;
-    width: 100%;
-    z-index: 1000;
-}
-
-section{
-    position: relative;
-    height: calc(100vh - 3rem);
-    width: 100%;
-    overflow: hidden;
-}
-
-.container{
-/*    max-width: 65rem;*/
-    padding: 0 2rem;
-    margin: 0 auto;
-    display: flex;
-    position: relative;
-    clear: both;
-}
-
-.logo-container{
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-.nav-btn{
-    display: flex;
-    flex: 4;
-}
-
-.nav-links{
-    flex: 4;
-    margin: 50px 0;
-}
-
-.log-sign{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-}
-
-.logo{
-    color: #FF7133;
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    line-height: 3rem;
-}
-
-.logo span{
-    font-weight: 300;
-}
-
-
-.nav-links > ul{
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.nav-link{
-    position: relative;
-}
-
-.nav-link > a{
-    line-height: 3rem;
-    color: #FF7133;
-    padding: 0 .8rem;
-    letter-spacing: 1px;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-link > a > i{
-    margin-left: .2rem;
-}
-
-
-
-.dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 200px;
-    transform: translateY(10px);
-    opacity: 0;
-    pointer-events: none;
-    border: solid 1px #acacac;
-    z-index: 1;
-    border-radius: 4px;
-}
-.dropdown ul{
-    position: relative;
-
-}
-
-.dropdown-link > a{
-    display: flex;
-    background-color: #fff;
-    color: #FF7133;
-    padding: 10px 20px;
-    font-size: 17px;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.dropdown-link:hover > a{
-    text-decoration: underline;
-    background-color: #fffcec;
-}
-
-.dropdown-link:not(:nth-last-child(2)){
-    border-bottom: 1px solid #efefef;
-}
-
-.dropdown-link i{
-    transform: rotate(-360deg);
-}
-
-.arrow{
-    position: absolute;
-    width: 11px;
-    height: 11px;
-    top: -5.5px;
-    left: 32px;
-    background-color: #FF7133;
-    transform: rotate(45deg);
-    cursor: pointer;
-    z-index: -1;
-}
-
-.dropdown-link:first-child:hover ~ .arrow{
-    background-color: #3498db;
-}
-
-.dropdown-link{
-    position: relative;
-}
-
-.dropdown.second{
-    top: 0;
-    left: -101%;
-    padding-left: .8rem;
-    cursor: pointer;
-    transform: translateX(10px);
-}
-
-.dropdown.second .arrow{
-    top: 10px;
-    left: 140px;
-    background-color: #333;
-}
-
-.nav-link:hover > .dropdown,
-.dropdown-link:hover > .dropdown{
-    transform: translate(0, 0);
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.hamburger-menu-container{
-    flex: 1;
-    display: none;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.hamburger-menu{
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    position: absolute;
-    right: 28px;
-    top: 20px;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.hamburger-menu div{
-    width: 1.6rem;
-    height: 3px;
-    border-radius: 3px;
-    background-color: #fff;
-    position: relative;
-    z-index: 1001;
-}
-
-
-.hamburger-menu div:before{
-    transform: translateY(-7px);
-}
-
-.hamburger-menu div:after{
-    transform: translateY(7px);
-}
-
-#check {
-    position: absolute;
-    top: 40px;
-    right: 30px;
-    transform: translateY(-50%);
-    width: 2.5rem;
-    height: 2.5rem;
-    z-index: 90000;
-    cursor: pointer;
-    opacity: 0;
-    /* display: none; */
-}
-/*.hamburger-menu-container {
-    position: absolute;
-    right: 28px;
-    top: -93px;
-}*/
-
-#check:checked ~ .hamburger-menu-container .hamburger-menu div{
-    background-color: transparent;
-}
-
-#check:checked ~ .hamburger-menu-container .hamburger-menu div:before{
-    transform: translateY(0) rotate(-45deg);
-}
-
-#check:checked ~ .hamburger-menu-container .hamburger-menu div:after{
-    transform: translateY(0) rotate(45deg);
-}
-
-@keyframes animation{
-    from{
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to{
-        opacity: 1;
-        transform: translateY(0px);
-    }
-}
-
-@media (max-width: 920px){
-    .dropdown {
-    max-height: 200px; /* Adjust the height as needed */
-    overflow-y: auto;
-    transition: max-height 0.5s ease;
-}
-
-.divshown {
-    max-height: 1000px; /* Adjust the max-height to accommodate all menu items */
-}
-    .hamburger-menu i{
-        font-size: 25px;
-    }
-  .hidediv{
-    display: none !important;
-}
-.divshown{
-    display: block !important;
-}
-
-    .hamburger-menu-container{
-        display: flex;
-    }
-
-    #check{
-        display: block;
-    }
-    .dropdown {
-    border: none;
-}
-.nav-link a {
-    color: #cd2653;
-    font-size: 1.1rem;
-    font-weight: 700;
-}
-.dropdown a {
-	color: #333 !important;
-	font-size: 1.2rem;
-	font-weight: normal;
-}
-   .nav-btn {
-    position: absolute;
-    height: calc(100vh - 3rem);
-    top: 6rem;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    overflow-x: hidden;
-    overflow-y: auto;
-    transform: translateX(100%);
-    visibility: hidden;
-}
-	img.logo-img {
-	    height: 90px;
-	}
-    #check:checked ~ .nav-btn{
-        transform: translateX(0);
-        	    visibility: visible;
-
-    }
-
-    #check:checked ~ .nav-btn .nav-link,
-    #check:checked ~ .nav-btn .log-sign{
-        animation: animation .5s ease forwards var(--i);
-    }
-    li.nav-link {
-   	border-top: 1px solid #dcd7ca;
-    border-bottom: 1px solid #dcd7ca;
-}
-    .nav-links{
-        flex: initial;
-        width: 100%;
-    }
-
-    .nav-links > ul {
-	    flex-direction: column;
-/*	    margin: 0px 30px;*/
-	}
-
-	.dropdown ul {
-/*	    margin: 0 30px;*/
-	}
-    .nav-link{
-        width: 100%;
-        opacity: 0;
-        transform: translateY(15px);
-
-    }
-
-    .nav-link > a{
-        line-height: 1;
-        padding: 1.6rem 2rem;
-    }
-
-    .nav-link:hover > a{
-
-        background-color: #fff;
-    }
-
-    .dropdown, .dropdown.second{
-        position: initial;
-        top: initial;
-        left: initial;
-        transform: initial;
-        opacity: 1;
-        pointer-events: auto;
-        width: 100%;
-        padding: 0;
-        background-color: #fff;
-        display: none;
-    }
-    
-    /*.nav-link:hover > .dropdown,
-    .dropdown-link:hover > .dropdown{
-        display: block;
-    }*/
-
-    #thisone{
-        transform: rotate(180deg);
-    }
-
-    .dropdown-link > a{
-        background-color: transparent;
-        color: #FF7133;
-        padding: 1.2rem 2rem;
-        line-height: 1;
-    }
-    li.dropdown-link {
-    	border-top: 1px solid #dcd7ca !important;
-	    border-bottom: 1px solid #dcd7ca !important;
-	}
-
-    .dropdown.second .dropdown-link > a{
-        padding: 1.2rem 2rem 1.2rem 3rem;
-    }
-
-    .dropdown.second .dropdown.second .dropdown-link > a{
-        padding: 1.2rem 2rem 1.2rem 4rem;
-    }
-
-    .dropdown-link:not(:nth-last-child(2)){
-        border-bottom: none;
-    }
-
-    .arrow{
-        z-index: 1;
-        background-color: #69bde7;
-        left: 10%;
-    }
-
-    .nav-link:hover .arrow{
-        background-color: #fff;
-    }
-
-    .dropdown .dropdown .arrow{
-        display: none;
-    }
-
-    .dropdown-link:hover > a{
-        background-color: #fff;
-    }
-
-    .dropdown-link:first-child:hover ~ .arrow{
-        background-color: #fff;
-    }
-
-    .nav-link > a > i{
-        font-size: 1.1rem;
-        transform: rotate(-360deg);
-    }
-
-    .dropdown i{
-        font-size: 1rem;
-    }
-
-
-}
-</style>
 <body>
-    <header>
-        <div class="container">
-            <input type="checkbox" name="" id="check" onclick="myFunction();">
-            
-            <div class="logo-container">
-                <img src="https://prashnavali.net/wp-content/uploads/2020/08/cropped-logo-1-1.png" data-src="https://prashnavali.net/wp-content/uploads/2020/08/cropped-logo-1-1.png" class="logo-img lazy loaded" data-was-processed="true">
-            </div>
-
-            <div class="nav-btn">
-                <div class="nav-links">
-                    <ul>
-                        <li class="nav-link" style="--i: .6s">
-                            <a href="https://prashnavali.net/">Home</a>
-                        </li>
-                        <li class="nav-link" style="--i: .85s">
-                            <a href="javascript:void(0)" class="tclass">Ramcharitmanas And Ram Prashnavali<i class="fas fa-chevron-down tclass"></i></a>
-                            <div class="dropdown">
-                                <ul>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/ramcharitmanas-prashnavali-online/">Ramcharitmanas Online Prashnavali</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/app-free-download-now/">Ram Shalaka Mobile App Free</a>
-                                    </li> 
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/%e0%a4%b6%e0%a5%8d%e0%a4%b0%e0%a5%80-%e0%a4%b0%e0%a4%be%e0%a4%ae-%e0%a4%b8%e0%a5%8d%e0%a4%a4%e0%a5%81%e0%a4%a4%e0%a4%bf-shri-ram-stuti/">श्री राम स्तुति (Shri Ram Stuti)</a>
-                                    </li> 
-                                     <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/watch-the-video//">श्री राम स्तुति (Shri Ram Stuti)</a>
-                                    </li> 
-                                    <li class="dropdown-link">
-                                        <a href="javascript:void(0)">Ram Shalaka Video</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="javascript:void(0)" class="func tclasssecond">Ramcharitmanas<i class="fas fa-chevron-down tclasssecond dropdouble"></i></a>
-                                        <div class="dropdown second hidediv">
-                                            <ul>
-                                                <li class="dropdown-link">
-                                                    <a href="https://prashnavali.net/ramcharitmanas-balkand/">Bal Kand</a>
-                                                </li>
-                                                <li class="dropdown-link">
-                                                    <a href="https://prashnavali.net/ramcharitmanas-ayodhyakand/">Ayodhya Kand</a>
-                                                </li>
-                                                <li class="dropdown-link">
-                                                    <a href="https://prashnavali.net/ramcharitmanas-aranyakand/">Aranya Kand</a>
-                                                </li>
-                                                <li class="dropdown-link">
-                                                    <a href="https://prashnavali.net/ramcharitmanas-aranyakand/">Kishkindha Kand</a>
-                                                </li>
-                                                <li class="dropdown-link">
-                                                    <a href="https://prashnavali.net/ramcharitmanas-aranyakand/">Sunder Kand</a>
-                                                </li>
-                                                <li class="dropdown-link">
-                                                    <a href="https://prashnavali.net/ramcharitmanas-aranyakand/">Lanka Kand</a>
-                                                </li>
-                                                <li class="dropdown-link">
-                                                    <a href="https://prashnavali.net/ramcharitmanas-uttarkand/">Uttar Kand</a>
-                                                </li>
-                                               
-                                            </ul>
-                                                <div class="arrow"></div>
-
-                                        </div>
-
-                                    </li>
-                                   
-                                    <div class="arrow"></div>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-link" style="--i: 1.1s">
-                            <a href="javascript:void(0)" class="tclass">Hanuman Prashnavali Online<i class="fas fa-chevron-down tclass"></i></a>
-                            <div class="dropdown">
-                                <ul>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/hanuman-prashnavali-online/">Hanuman Prashnavali Online</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/hanuman-prashnavali-online/">हनुमान आरती (Hanuman Aarti)</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/sankat-mochan-hanuman-ashtak/">Sankat Mochan Hanuman Ashtak</a>
-                                        
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/hanuman-chalisa/">Hanuman Chalisa</a>
-                                    </li>
-                                </ul>
-                                <div class="arrow"></div>
-
-                            </div>
-                        </li>
-                         <li class="nav-link" style="--i: 1.1s">
-                            <a href="javascript:void(0)" class="tclass">Sai Baba Prashnavali<i class="fas fa-chevron-down tclass"></i></a>
-                            <div class="dropdown">
-                                <ul>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/hanuman-chalisa/">Sai Baba Prashnavali</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/%e0%a4%b6%e0%a5%8d%e0%a4%b0%e0%a5%80-%e0%a4%b6%e0%a4%bf%e0%a4%b0%e0%a4%a1%e0%a5%80-%e0%a4%b8%e0%a4%be%e0%a4%88%e0%a4%82-%e0%a4%ac%e0%a4%be%e0%a4%ac%e0%a4%be-%e0%a4%95%e0%a5%80-%e0%a4%86%e0%a4%b0/">श्री शिरडी साईं बाबा की आरती</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/%e0%a4%b6%e0%a5%8d%e0%a4%b0%e0%a5%80-%e0%a4%b8%e0%a4%be%e0%a4%88%e0%a4%82-%e0%a4%ac%e0%a4%be%e0%a4%ac%e0%a4%be-%e0%a4%9a%e0%a4%be%e0%a4%b2%e0%a4%bf%e0%a4%b8%e0%a4%be/">श्री साईं बाबा चालिसा</a>
-                                        
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/%e0%a4%b6%e0%a5%8d%e0%a4%b0%e0%a5%80-%e0%a4%b8%e0%a4%be%e0%a4%88%e0%a4%82-%e0%a4%ac%e0%a4%be%e0%a4%ac%e0%a4%be-%e0%a4%9a%e0%a4%be%e0%a4%b2%e0%a4%bf%e0%a4%b8%e0%a4%be/">LIVE SAI DARSHAN</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/shri-sai-satcharita/">Shri Sai Satcharitra</a>
-                                    </li>
-                                </ul>
-                                                               <div class="arrow"></div>
-
-                            </div>
-                        </li>
-                         <li class="nav-link" style="--i: 1.1s">
-                            <a href="javascript:void(0)" class="tclass">Ganesha Prashnavali<i class="fas fa-chevron-down tclass"></i></a>
-                            <div class="dropdown">
-                                <ul>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/shri-sai-satcharita/">Ganesha Prashnavali</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/ganesha-aarti/">Ganesha Aarti</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/ganesh-chalisa/">Ganesh Chalisa</a>
-                                        
-                                    </li>
-                                   
-                                </ul>
-                                                               <div class="arrow"></div>
-
-                            </div>
-                        </li>
-                         <li class="nav-link" style="--i: 1.1s">
-                            <a href="javascript:void(0)" class="tclass">Shiva Prashnavali<i class="fas fa-chevron-down tclass"></i></a>
-                            <div class="dropdown">
-                                <ul>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/shiva-prashnavali/">Shiva Prashnavali</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/shiva-prashnavali/">Shiva Chalisa</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/shiva-aarti/">Shiva Aarti</a>
-                                        
-                                    </li>
-                                   
-                                </ul>
-                                                               <div class="arrow"></div>
-
-                            </div>
-                        </li>
-                        <li class="nav-link" style="--i: 1.1s">
-<a href="javascript:void(0)" class="tclass scroll-element" data-scroll-top="0">Durga Prashnavali<i class="fas fa-chevron-down tclass lastclickd"></i></a>
-                            <div class="dropdown">
-                                <ul>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/durga-prashnavali/">Durga Prashnavali</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/durga-chalisa/">Durga Chalisa</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="https://prashnavali.net/durga-aarti/" id="lastelem">Durga Aarti</a>
-                                        
-                                    </li>
-
-                                </ul>
-                                                               <div class="arrow"></div>
-
-                            </div>
-                        </li>
-                       
-                    </ul>
-                </div>
-
-             	
-            </div>
-
-            <div class="hamburger-menu-container">
-                <div class="hamburger-menu">
-                    <div></div>
-                    <label for="check"><i class="fa fa-bars" id="c-icon"></i></label>
-
-                </div>
+	<section class="section-1 clearfix w-100" id="section-1">
+		<li class="nav-item d-xl-none d-lg-none d-block list-unstyled bk">
+			<a href="javascript:void(0)" class=" top-btn custom-button text-white text-decoration-none">
+				<img src="images/calendar.svg" width="30px" class="pr-2" alt=""> 
+				<span>Book Now!</span>
+			</a>
+        </li>
+		<input type="checkbox" id="check" class="d-none">
+        <label for="check" class="d-block d-xl-none d-lg-none bar">
+            <i class="fa fa-bars" id="open"></i>
+        </label>
+        <nav class="custom-navbar d-md-block d-lg-flex container-fluid px-3 px-md-5 pt-3">
+        <div class="d-md-flex">
+            <div class="logo-wrapper">
+                <a href="javascript:void(0)" >
+                    <img src="images/Logo.svg" alt="">
+                </a>
             </div>
         </div>
-    </header>
-    <main>
-        <section>
-            <div class="overlay"></div>
-        </section>
-    </main>
-    <script type="text/javascript">
-function handleClick(event) {
-  var clickedElement = event.target;
+            <div class="ml-auto hide-md">
+                <ul class="pt-2 mb-0 d-xl-block d-lg-block d-none fs ml-4">
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link">Are you a Hospital?</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block br list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link">Are you a Doctor?</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link">Call us: 1800 465 895</a>
+                    </li>
+                </ul>
+                <ul class="fl pl-0">
+					<li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+						
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link color-black">Services</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link color-black">Knowledge Hub</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link color-black">ProStore</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link color-black">About Us</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link color-black">Contact Us</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled bk">
+                        <a href="javascript:void(0)" class=" custom-button text-white text-decoration-none">
+							<img src="images/calendar.svg" width="30px" class="pr-2" alt=""> 
+							<span>Book Now!</span>
+						</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+		<div class="container-fluid px-lg-5 px-xl-5 px-md-5 px-3">
+			<div class="main-content my-3 pt-5 pt-md-0">
+				<div class="container mx-auto">
+				<div class="row">
+					<div class="col-lg-5 col-md-12 order-2 order-lg-1 order-xl-1">
+						<div class="text pt-lg-5 p-xl-5 p-md-5 p-0 pt-1 pb-5">
+							<div class="pt-4">
+								<h1 class="font-weight-bold">Believe, you can.</h1>
+								<p class="pt-4 pb-3">Limitless possibilities is what life is all about! Barriers are just what needs to be overcome to experience life to the fullest.</p>
+								<a href="javascript:void(0)" class="text-white text-decoration-none ">
+									<i class="fas fa-play mr-1"></i><span> Watch The Video</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-7 col-md-12 order-1 order-lg-2 order-xl-2">
+						<div class="image">
+							<img src="images/main-img.png" class="img-fluid">
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+ 	</section>
+	<section class="section-2 clearfix w-100" id="section-2">
+		 <div class="container">
+			 <div class="py-5">
+				 <div class="content ">
+					<div class="head-content text-center py-5">
+						<h2 class="font-weight-bold">Transform your health to live an active and abundant life.</h2>
+						<p class="font-weight-normal">When you move better your mind also starts to work more efficiently and this further enables you to make healthier choices be it at work or the quality of life at home with friends and family. We look at health not merely with the absence of disease but elevating your health status to a state of complete physical, mental and social well-being.</p>
+					</div>
+					<div class="px-0 px-lg-5 px-xl-5">
+					<div class="row">
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+							<div class="inner-content d-flex justify-content-center">
+								<div class="image">
+									<img src="images/Group 74607.svg">
+								</div>
+								<div class="text pl-3">
+									<h5>Ultimate <br> Balance</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 ">
+							<div class="inner-content d-flex justify-content-center mt-sm-0 mt-4">
+								<div class="image">
+									<img src="images/Group 74608.svg">
+								</div>
+								<div class="text pl-3">
+									<h5>Enhanced <br> Strength</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 ">
+							<div class="inner-content d-flex justify-content-center mt-md-0 mt-4">
+								<div class="image">
+									<img src="images/Group 74609.svg">
+								</div>
+								<div class="text pl-3">
+									<h5>Painfree <br> Living</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 ">
+							<div class="inner-content d-flex justify-content-center mt-md-0  mt-4">
+								<div class="image">
+									<img src="images/Group 74610.svg">
+								</div>
+								<div class="text pl-3">
+									<h5>Improved <br> Mobility</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="explore pt-md-5 pb-md-4 pt-4 pb-3 text-center">
+						<a href="javascript:void(0)" class="text-decoration-none">Explore how we make a difference <img src="images/arrow.svg" class="ml-2"></a>
+					</div>
+				</div>
+				</div>
+			 </div>
+		 </div>
+	 </section>
+	<section class="section-3 clearfix w-100" id="section-3">
+		 <div class="py-5 h-100">
+			<div class="container-fluid px-3 px-lg-5 px-lg-5 px-md-5">
+				<div class="content">
+					<div class="head-content text-center pb-5">
+						<h2 class="font-weight-bold">Find the care you need</h2>
+						<p class="font-weight-normal">Consult top doctors for any health concern. Find experienced <br> doctors across all specialties</p>
+					</div>
+				</div>
+				<div class=" h-100 position-relative slider-control">
+				<div id="demo" class="carousel slide position-static" data-ride="carousel">
 
-  // Get the current scroll position from the data-scroll-top attribute
-  var scrollTop = parseInt(clickedElement.getAttribute("data-scroll-top"));
+					<!-- Indicators -->
+					<ul class="carousel-indicators change-indicators">
+					<li data-target="#demo" data-slide-to="0" class="active"></li>
+					<li data-target="#demo" data-slide-to="1"></li>
+					<li data-target="#demo" data-slide-to="2"></li>
+					<li data-target="#demo" data-slide-to="3"></li>
+					</ul>
+				
+					<!-- The slideshow -->
+					<div class="carousel-inner">
+					<div class="carousel-item active">
+						<div class="row">
+							<div class="col-lg-4 ">
+								<div class="box box-1 d-flex">
+									<div class="text">
+										<h3>Physical Health</h3>
+										<a href="javascript:void(0)">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/physical-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 d-none d-lg-block d-xl-block">
+								<div class="box box-2 d-flex">
+									<div class="text">
+										<h3>Kids Health</h3>
+										<a href="javascript:void(0)">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/physical-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 d-none d-lg-block d-xl-block">
+								<div class="box box-3 d-flex">
+									<div class="text">
+										<h3>Urban Health</h3>
+										<a href="javascript:void(0)">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/urban-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col-lg-4 d-none d-lg-block d-xl-block">
+								<div class="box box-1 d-flex">
+									<div class="text">
+										<h3>Physical Health</h3>
+										<a href="javascript:void(0)">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/physical-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 d-none d-lg-block d-xl-block">
+								<div class="box box-2 d-flex">
+									<div class="text">
+										<h3>Kids Health</h3>
+										<a href="javascript:void(0)">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/physical-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="box box-3 d-flex">
+									<div class="text">
+										<h3>Urban Health</h3>
+										<a href="javascript:void(0)">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/urban-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col-lg-4 d-none d-lg-block d-xl-block">
+								<div class="box box-1 d-flex">
+									<div class="text">
+										<h3>Physical Health</h3>
+										<a href="javascript:void(0)">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/physical-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 d-none d-lg-block d-xl-block">
+								<div class="box box-2 d-flex">
+									<div class="text">
+										<h3>Kids Health</h3>
+										<a href="javascript:void(0)">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/physical-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="box box-3 d-flex">
+									<div class="text">
+										<h3>Urban Health</h3>
+										<a href="javascript:void(0)" class="text-decoration-none">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/urban-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="box box-1 d-flex">
+									<div class="text">
+										<h3>Physical Health</h3>
+										<a href="javascript:void(0)" class="text-decoration-none">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/physical-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 d-none d-lg-block d-xl-block">
+								<div class="box box-2 d-flex">
+									<div class="text">
+										<h3>Kids Health</h3>
+										<a href="javascript:void(0)" class="text-decoration-none">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/physical-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 d-none d-lg-block d-xl-block">
+								<div class="box box-3 d-flex">
+									<div class="text">
+										<h3>Urban Health</h3>
+										<a href="javascript:void(0)" class="text-decoration-none">
+											Book now
+										</a>
+									</div>
+									<div class="image">
+										<img src="images/urban-h.png" class="img-custom">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				
+					<!-- Left and right controls -->
+					<a class="carousel-control-prev" href="#demo" data-slide="prev">
+						<i class="fa fa-chevron-left"></i>
+					</a>
+					<a class="carousel-control-next" href="#demo" data-slide="next">
+						<i class="fa fa-chevron-right"></i>
+					</a>
+				</div>
+			</div>	
+		</div>
 
-  // Add 100 to the scroll position
-  var newScrollTop = scrollTop + 100;
+			<div class="more-services pt-5">
+				<div class="container">
+					<div class="pt-5 text-center">
+						<h4 class="pt-md-5 pb-md-4 pt-4 pb-3">Explore more of our services</h4>
+					</div>
+					<div class="mx-5">
+						<div class="d-grid py-md-5 py-3">
+							<div class="short-box">
+								<div class="inner-box">
+									<div class="d-flex justify-content-center">
+										<div class="image">
+											<img src="images/speech.svg" alt="">
+										</div>
+										<div class="text">
+											<h5>Speech Therapy</h5>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="short-box">
+								<div class="inner-box">
+									<div class="d-flex justify-content-center">
+										<div class="image">
+											<img src="images/women.svg" alt="">
+										</div>
+										<div class="text">
+											<h5>Women’s Health</h5>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="short-box">
+								<div class="inner-box">
+									<div class="d-flex justify-content-center">
+										<div class="image">
+											<img src="images/movement.svg" alt="">
+										</div>
+										<div class="text">
+											<h5>Movement Science</h5>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="short-box">
+								<div class="inner-box">
+									<div class="d-flex justify-content-center">
+										<div class="image">
+											<img src="images/special.svg" alt="">
+										</div>
+										<div class="text">
+											<h5>Special Education</h5>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="short-box center-sm center-lg">
+								<div class="inner-box">
+									<div class="d-flex justify-content-center">
+										<div class="image">
+											<img src="images/elderly.svg" alt="">
+										</div>
+										<div class="text">
+											<h5>Ederly <br> Care</h5>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class=" pt-3 py-0 py-md-5 text-center">
+							<a href="javascript:void(0)" class="text-decoration-none custom-button text-white ">Explore all Services</a>
+						</div>
+					</div>
+				</div>
+			</div>
+	 </section>
+	<section class="section-4 clearfix w-100" id="section-4">
+		 <div class="py-md-5 py-4">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 order-lg-1 order-xl-1 order-2">
+						<div class="text pt-md-5 pt-4">
+							<div class="mt-2 head-content">
+								<h2 class="font-weight-bold">
+									We understand your body better by connecting the dots.
+								</h2>
+								<p class="py-md-3 py-2">Health to us means the perfect balance of the body which helps you move, mind that makes you think and spirit that enables you to feel. Our programs impact you and enable you to live a perfect balanced life built on these foundation stones.</p>
+								<div class="row">
+									<div class="col-lg-4 col-md-4">
+										<div class="inner-box d-flex justify-content-center mt-xl-0 mt-md-0 mt-lg-0 mt-sm-0 mt-3">
+											<div class="image">
+												<img src="images/body.svg">
+											</div>
+											<div class="text">
+												<h5>Body</h5>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4">
+										<div class="inner-box d-flex justify-content-center mt-xl-0 mt-md-0 mt-lg-0 mt-sm-0 mt-3">
+											<div class="image">
+												<img src="images/mind.svg">
+											</div>
+											<div class="text">
+												<h5>Mind</h5>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4">
+										<div class="inner-box d-flex justify-content-center mt-xl-0 mt-md-0 mt-lg-0 mt-sm-0 mt-3">
+											<div class="image">
+												<img src="images/nutrition.svg">
+											</div>
+											<div class="text">
+												<h5>Nutrition</h5>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="explore py-0 pt-4 py-md-5">
+									<a href="javascript:void(0)" class="text-decoration-none">Explore how we make a difference <img src="images/arrow.svg" class="ml-2"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 order-lg-2 order-xl-2 order-1">
+						<div class="image h-100">
+							<img src="images/dots.png" class="h-100 w-100 custom-md-size">
+						</div>					
+					</div>
+				</div>
+				<div class="mt-5">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="image">
+								<img src="images/phone.png" class="w-100 pr-5 custom-md-size">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="pt-md-5 pb-md-4 pt-3">
+								<div class="head-content text pt-md-5 pb-md-4 pt-4">
+									<h2 class="font-weight-bold">Looking to lead a life that enriches you with the best health?</h2>
+									<p class="py-md-3 py-2">Pro Physio tailors hyper personalised health programs that put you on the path to a life that filled with good health and happiness. Enroll now to start a journey with us.</p>
+									<div class="download-btn pt-md-4 pt-3">
+										<a href="javascript:void(0)" class="custom-button text-decoration-none text-white ">Download App</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	 </section>
+	<section class="section-5 clearfix w-100" id="section-5">
+		 <div class="py-0 py-md-5">
+			<div class="py-md-5 py-4">
+			<div class="container px-lg-5 px-xl-5 px-md-5 px-3">
+				<div class="row px-0 px-md-5 px-lg-5 px-xl-5 mx-0 mx-md-5 mx-lg-5 mx-xl-5">
+					<div class="col-xl-6 col-lg-6 col-md-12">
+						<div class="head-content">
+							<h2 class="font-weight-bold ">The ProPhysio Difference</h2>
+							<p class="py-1 py-md-3">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
+						</div>
+						<div class="explore pt-md-4 pt-2">
+							<a href="javascript:void(0)" class="text-decoration-none">Explore all services <img src="images/arrow.svg" class="ml-2"></a>
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-12">
+						<div class="pt-3 pt-md-5">
+						<div class="row text-center text-lg-left text-xl-left">
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="inner-box">
+									<div class="number">
+										<h3>10x</h3>
+									</div>
+									<div class="para">
+										<p>More <br> Effectiveness</p>
+									</div>
+								</div>
+								<div class="inner-box pt-2">
+									<div class="number">
+										<h3>4x</h3>
+									</div>
+									<div class="para">
+										<p>More <br> Compliance</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="inner-box">
+									<div class="number">
+										<h3>5x</h3>
+									</div>
+									<div class="para">
+										<p>Faster <br> Recovery</p>
+									</div>
+								</div>
+								<div class="inner-box pt-2">
+									<div class="number">
+										<h3>100%</h3>
+									</div>
+									<div class="para">
+										<p>Care</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	 </section>
+	<section class="section-6 clearfix w-100" id="section-6">
+		 <div class="container">
+			 <div class="py-4 py-md-5 px-0 px-md-5">
+				<div id="demo-2" class="carousel slide  mb-5" data-ride="carousel">
 
-  // Update the data-scroll-top attribute with the new scroll position
-  clickedElement.setAttribute("data-scroll-top", newScrollTop);
+					<!-- Indicators -->
+					<ul class="carousel-indicators change-indicators">
+					  <li data-target="#demo-2" data-slide-to="0" class="active"></li>
+					  <li data-target="#demo-2" data-slide-to="1"></li>
+					  <li data-target="#demo-2" data-slide-to="2"></li>
+					</ul>
+					
+					<!-- The slideshow -->
+					<div class="carousel-inner">
+					  <div class="carousel-item active">
+						<div class="row">
+							<div class="col-lg-6 pr-0">
+								<div class="text p-4 p-md-5">
+									<h2>Most advanced therapy lab</h2>
+									<p class="py-3">Healing involves carefully analysing the health of
+										 the individual through objective diagnostic tools enabled with bio fe
+										 edback tools that help us understand what are the aspects that can be work
+										 ed on to improve health. We use modern diagnostic and therapeutic tools to 
+										 effective heal our clients.</p>
+										 <div class="explore pt-0 pt-md-3">
+											<a href="javascript:void(0)" class="text-decoration-none">Explore how we make a difference <img src="images/arrow.svg" class="ml-2"></a>
+										</div>
+								</div>
+							</div>
+							<div class="col-lg-6 pl-0">
+								<div class="image">
+									<img src="images/lab.png">
+								</div>
+							</div>
+						</div>
+					  </div>
+					  <div class="carousel-item">
+						<div class="row">
+							<div class="col-lg-6 pr-0">
+								<div class="text p-4 p-md-5">
+									<h2>Most advanced therapy lab</h2>
+									<p class="py-3">Healing involves carefully analysing the health of the individual through objective diagnostic tools enabled with bio feedback tools that help us understand what are the aspects that can be worked on to improve health. We use modern diagnostic and therapeutic tools to effective heal our clients.</p>
+									<div class="explore pt-0 pt-md-3">
+										<a href="javascript:void(0)" class="text-decoration-none">Explore how we make a difference <img src="images/arrow.svg" class="ml-2"></a>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 pl-0">
+								<div class="image">
+									<img src="images/lab.png">
+								</div>
+							</div>
+						</div>
+					  </div>
+					  <div class="carousel-item">
+						<div class="row">
+							<div class="col-lg-6 pr-0">
+								<div class="text p-4 p-md-5">
+									<h2>Most advanced therapy lab</h2>
+									<p class="py-3">Healing involves carefully analysing the health of the individual through objective diagnostic tools enabled with bio feedback tools that help us understand what are the aspects that can be worked on to improve health. We use modern diagnostic and therapeutic tools to effective heal our clients.</p>
+									<div class="explore pt-0 pt-md-3">
+										<a href="javascript:void(0)" class="text-decoration-none">Explore how we make a difference <img src="images/arrow.svg" class="ml-2"></a>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 pl-0">
+								<div class="image">
+									<img src="images/lab.png">
+								</div>
+							</div>
+						</div>
+					  </div>
+					</div>
+					
+					<!-- Left and right controls -->
+					<a class="carousel-control-prev" href="#demo-2" data-slide="prev">
+						<i class="fas fa-arrow-left arrow"></i>
+					  </a>
+					  <a class="carousel-control-next" href="#demo-2" data-slide="next">
+						<i class="fas fa-arrow-right arrow"></i>
+					  </a>
+				  </div>
+			 </div>
+		 </div>
+	 </section>
 
-  // Perform any additional actions with the new scroll position
-  console.log("New scroll position: " + newScrollTop);
-}
+	<section class="section-7 clearfix w-100" id="section-7">
+		<div class="container-fluid px-lg-5 px-xl-5 px-md-5 px-3">
+			<div class="py-md-5 py-4 mt-5">
+				<div class="head-content text-center mb-5">
+					<h2 class="font-weight-bold">Got questions?</h2>
+					<p>No worries, we’ve got you covered</p>
+				</div>
+			 <div id="demo-3" class="carousel slide" data-ride="carousel">
 
-var elements = document.querySelectorAll(".scroll-element");
-elements.forEach(function(element) {
-  element.addEventListener("click", handleClick);
-});
+  <!-- Indicators -->
+				  <ul class="carousel-indicators change-indicators">
+					<li data-target="#demo-3" data-slide-to="0" class="active"></li>
+					<li data-target="#demo-3" data-slide-to="1"></li>
+					<li data-target="#demo-3" data-slide-to="2"></li>
+				  </ul>
 
+				  <!-- The slideshow -->
+				  <div class="carousel-inner">
+						<div class="carousel-item active">
+						  <div class="row pb-5">
+									<div class="col-lg-4">
+										<div class="inner-box">
+											<h4 class="font-italic">When should I see a physiotherapist?</h4>
+											<span>29 people asked</span>
+										</div>
+									</div>
+									<div class="col-lg-4 d-none d-lg-block d-xl-block">
+										<div class="inner-box">
+											<h4 class="font-italic">Is therapy painful and a tough experience ?</h4>
+											<span>36 people asked</span>
+										</div>
+									</div>
+									<div class="col-lg-4 d-none d-lg-block d-xl-block">
+										<div class="inner-box">
+											<h4 class="font-italic">How do I know what is the best program for me?</h4>
+											<span>45 people asked</span>
+										</div>
+									</div>
+								</div>
+						</div>
+						<div class="carousel-item">
+						  <div class="row pb-5">
+									<div class="col-lg-4 d-none d-lg-block d-xl-block">
+										<div class="inner-box">
+											<h4 class="font-italic">When should I see a physiotherapist?</h4>
+											<span>29 people asked</span>
+										</div>
+									</div>
+									<div class="col-lg-4 ">
+										<div class="inner-box">
+											<h4 class="font-italic">Is therapy painful and a tough experience ?</h4>
+											<span>36 people asked</span>
+										</div>
+									</div>
+									<div class="col-lg-4 d-none d-lg-block d-xl-block">
+										<div class="inner-box">
+											<h4 class="font-italic">How do I know what is the best program for me?</h4>
+											<span>45 people asked</span>
+										</div>
+									</div>
+								</div>
+						</div>
+						<div class="carousel-item">
+						  <div class="row pb-5">
+									<div class="col-lg-4 d-none d-lg-block d-xl-block">
+										<div class="inner-box">
+											<h4 class="font-italic">When should I see a physiotherapist?</h4>
+											<span>29 people asked</span>
+										</div>
+									</div>
+									<div class="col-lg-4 d-none d-lg-block d-xl-block">
+										<div class="inner-box">
+											<h4 class="font-italic">Is therapy painful and a tough experience ?</h4>
+											<span>36 people asked</span>
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="inner-box">
+											<h4 class="font-italic">How do I know what is the best program for me?</h4>
+											<span>45 people asked</span>
+										</div>
+									</div>
+								</div>
+						</div>
+					  </div>
+						</div>
+						<div class="explore pt-5 text-center">
+							<a href="javascript:void(0)" class="text-decoration-none">
+								Explore all FAQ’s <img src="images/arrow.svg" class="ml-2">
+							</a>
+						</div>
+					</div>
+				</div>
+	 </section>
+	<section class="section-8 clearfix w-100" id="section-8">
+		<div class="container">
+			<div class="py-4 py-md-5">
+			<div class="head-content px-1 px-md-0">
+				<h2 class="font-weight-bold">How we’ve helped people</h2>
+				<p>ProPhysio has transform peoples lifestyle to help lead lives on their own terms.</p>
+			</div>
+		</div>
+		</div>
+		<div class="container-fluid">
+				 <div id="demo-4" class="carousel slide" data-ride="carousel">
+				  <!-- The slideshow -->
+				  <div class="carousel-inner">
+					<div class="carousel-item active">
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="inner-box inner-box-1 same">
+									<div class="image">
+										<img src="images/people-1.png" class="img-fluid">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6  d-none d-lg-block d-xl-block">
+								<div class="inner-box inner-box-2 h-100">
+									<div class="row h-100">
+										<div class="col-lg-6 pl-2">
+												<div class="image">
+													<img src="images/people-2.png" class="h-100 w-100 custom-size">
+												</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="text mt-5">
+												<h5 class="font-weight-bold">Vishal Kumar</h5>
+												<p>Age 32 years</p>
+												<p class="mb-5">A year ago I was in no position to stand, walking was just impossible. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
+												<div class="watch mt-5">
+													<a href="javascript:void(0)" class="text-white text-decoration-none">
+														<i class="fas fa-play mr-1"></i>
+														<span>Watch The Video</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 d-none d-lg-block d-xl-block">
+								<div class="inner-box inner-box-3 same">
+									<div class="image">
+										<img src="images/people-1.png" class="img-fluid">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					 <div class="carousel-item">
+						<div class="row">
+							<div class="col-lg-3 d-none d-lg-block d-xl-block">
+								<div class="inner-box inner-box-1 same">
+									<div class="image">
+										<img src="images/people-1.png" class="img-fluid">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 ">
+								<div class="inner-box inner-box-2 h-100">
+									<div class="row h-100">
+										<div class="col-lg-6 pl-2">
+												<div class="image">
+													<img src="images/people-2.png" class="img-fluid custom-size">
+												</div>
+										</div>
+										<div class="col-lg-6 ">
+											<div class="text mt-5">
+												<h5 class="font-weight-bold">Vishal Kumar</h5>
+												<p>Age 32 years</p>
+												<p class="mb-5">A year ago I was in no position to stand, walking was just impossible. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
+												<div class="watch mt-5">
+													<a href="javascript:void(0)" class="text-white text-decoration-none">
+														<i class="fas fa-play mr-1"></i>
+														<span>Watch The Video</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 d-none d-lg-block d-xl-block">
+								<div class="inner-box inner-box-3 same">
+									<div class="image">
+										<img src="images/people-1.png" class="img-fluid">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					 <div class="carousel-item">
+						<div class="row">
+							<div class="col-lg-3 d-none d-lg-block d-xl-block">
+								<div class="inner-box inner-box-1 same">
+									<div class="image">
+										<img src="images/people-1.png" class="img-fluid">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 d-none d-lg-block d-xl-block">
+								<div class="inner-box inner-box-2 h-100">
+									<div class="row h-100">
+										<div class="col-lg-6 pl-2">
+												<div class="image">
+													<img src="images/people-2.png" class="img-fluid custom-size">
+												</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="text mt-5">
+												<h5 class="font-weight-bold">Vishal Kumar</h5>
+												<p>Age 32 years</p>
+												<p class="mb-5">A year ago I was in no position to stand, walking was just impossible. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
+												<div class="watch mt-5">
+													<a href="javascript:void(0)" class="text-white text-decoration-none">
+														<i class="fas fa-play mr-1"></i>
+														<span>Watch The Video</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="inner-box inner-box-3 same">
+									<div class="image">
+										<img src="images/people-1.png" class="img-fluid">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				  </div>
 
-    	function myFunction() {
-
-    	var cicon = document.getElementById('c-icon');
-    	ciconcl = cicon.classList;
-    	if(ciconcl=="fa fa-bars"){
-            cicon.classList.remove("fa-bars");
-              cicon.classList.add("fa-close");
-              
-         }
-         else {
-              cicon.classList.remove("fa-close");
-              cicon.classList.add("fa-bars");
-         }
-
-	}
-
-var navLinks = document.getElementsByClassName("nav-link");
-
-for (var i = 0; i < navLinks.length; i++) {
- navLinks[i].addEventListener("click", function(event) {
- 
-
-    if (window.innerWidth <= 920 && event.target.classList.contains("tclass")) {
-
-
-
-    var element = document.querySelector('.tclasssecond');
-
-
-    element.addEventListener('click', function() {
-       var icond = document.querySelector('.dropdouble');
-       if (icond.getAttribute("id") === "thisone") {
-        icond.removeAttribute("id");
-        console.log("Removed 'thisone' id from closestIcon:", closestIcon);
-      } else {
-        icond.setAttribute("id", "thisone");
-        console.log("Added 'thisone' id to closestIcon:", closestIcon);
-      }
-
-
-      var nextSibling = element.nextElementSibling;
-     var nextSiblingClassList = element.nextElementSibling.classList;
-      if (nextSiblingClassList.contains("divshown")) {
-        nextSiblingClassList.remove("divshown");
-        nextSiblingClassList.add("hidediv");
-      } else {
-        nextSiblingClassList.remove("hidediv");
-        nextSiblingClassList.add("divshown");
-      }
-
-    });
-
-
-
-
-       evchild = event.target.children;
-      var closestIcon = event.target.closest("i.fas") || event.target.children[0];
-     if (closestIcon.getAttribute("id") === "thisone") {
-        closestIcon.removeAttribute("id");
-        console.log("Removed 'thisone' id from closestIcon:", closestIcon);
-      } else {
-        closestIcon.setAttribute("id", "thisone");
-        console.log("Added 'thisone' id to closestIcon:", closestIcon);
-      }
-
-      var dropdownDiv = this.querySelector(".dropdown");
-      var dropdownClassList = dropdownDiv.classList;
-      
-      if (dropdownClassList.contains("divshown")) {
-        dropdownClassList.remove("divshown");
-        dropdownClassList.add("hidediv");
-      } else {
-        dropdownClassList.remove("hidediv");
-        dropdownClassList.add("divshown");
-      }
-    }
-  });
-}
-
-
-    </script>
-
+		  <!-- Left and right controls -->
+		  <a class="carousel-control-prev control-a" href="#demo-4" data-slide="prev">
+			<i class="fas fa-arrow-left arrow"></i>
+		  </a>
+		  <a class="carousel-control-next control-a" href="#demo-4" data-slide="next">
+			<i class="fas fa-arrow-right arrow"></i>
+		  </a>
+		</div>
+		<div class="container">
+			<div class="explore pt-5">
+				<a href="javascript:void(0)" class="text-decoration-none">Claim your free session now! <img src="images/arrow.svg" class="ml-2"></a>
+			</div>
+		</div>
+	</div>
+</div>
+	 </section>
+	 
+	<section class="section-9 clearfix w-100" id="section-9">
+		<div class="container-fluid px-lg-5 px-xl-5 px-md-5 px-3">
+			<div class="mt-5 py-4 py-md-5">
+				<div class="head-content text-center">
+					<h2 class="font-weight-bold">Our partners in healthcare</h2>
+					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed <br> diam nonumy eirmod tempor invidunt ut labore et dolore</p>
+				</div>
+				<div class="">
+					<div class="row">
+						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+							<div class="image text-center">
+								<img src="images/apollo.png" class="img-fluid">
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+							<div class="image text-center">
+								<img src="images/work.png" class="img-fluid">
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+							<div class="image text-center">
+								<img src="images/bird.png" class="img-fluid">
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+							<div class="image text-center">
+								<img src="images/kara.png" class="img-fluid">
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+							<div class="image text-center">
+								<img src="images/nu.png" class="img-fluid">
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+							<div class="image text-center">
+								<img src="images/apollo.png" class="img-fluid">
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+							<div class="image text-center">
+								<img src="images/prakriya.png" class="img-fluid">
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+							<div class="image text-center">
+								<img src="images/rainbow.png" class="img-fluid">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section-10 clearfix w-100" id="section-10">
+		<div class="container">
+			<div class=" py-4 py-md-5">
+				<div class="head-content text-center">
+					<h2 class="font-weight-bold">Live healthy like a Pro</h2>
+					<p>Get insights into your health and tips to keep you going fit.</p>
+				</div>
+				<div class="tab-gallery-main ">
+					<div class="button-container py-4">
+						<ul class="nav nav-pills justify-content-center">
+							<li class="nav-item">
+								<a  class="nav-link active" data-toggle="pill" href="#demo1">Podcasts</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="pill" href="#demo2">Videos</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="pill" href="#demo3">Articles</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="pill" href="#demo4">Tutorials</a>
+							</li>
+						</ul>
+					</div>
+					<div class="tab-content my-3 px-0 px-lg-5 px-xl-5 mx-lg-5 mx-xl-5 mx-0">
+						<div class="tab-pane container active px-0 px-lg-3 px-xl-3" id="demo1">
+							<div class="row">
+								<div class="col-lg-6 col-md-12">
+									<div class="inner-box position-relative h-100 big">
+										<div class="image h-100">
+											<img src="images/tab-1.png" class="w-100 h-100">
+											<div class="top-text position-absolute">
+												<h5>Movement sciences <br> & Kinesiology</h5>
+												<h3>The <br> science of <br> running.</h3>
+											</div>
+											<div class="bottom-text position-absolute">
+												<div class="heart rounded">
+													<a href="javascript:void(0)" class="text-decoration-none mr-3">
+														<i class="fa fa-heart mr-1"></i>
+														<span>82 Likes</span>
+													</a>
+													<a href="javascript:void(0)" class="text-decoration-none">
+														<i class="fa fa-eye mr-1 text-dark"></i>
+														<span>5min read</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-6">
+									<div class="inner-box">
+										<div class="image">
+											<img src="images/tab-2.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Your Mind</h5>
+											<p>A wearable device to manage stress</p>
+										</div>
+									</div>
+									<div class="inner-box mt-4">
+										<div class="image">
+											<img src="images/tab-3.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Community</h5>
+											<p>Exercise is the best medicine</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-6 mt-xl-0 mt-md-0 mt-lg-0 mt-3">
+									<div class="inner-box">
+										<div class="image">
+											<img src="images/tab-4.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Community</h5>
+											<p>Women power The best there is</p>
+										</div>
+									</div>
+									<div class="inner-box mt-4">
+										<div class="image">
+											<img src="images/tab-4.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Your Mind</h5>
+											<p>How is ADHD and Autism different</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane container fade" id="demo2">
+							<div class="row">
+								<div class="col-lg-6 col-md-12">
+									<div class="inner-box position-relative h-100 big">
+										<div class="image h-100">
+											<img src="images/tab-1.png" class="w-100 h-100">
+											<div class="top-text position-absolute">
+												<h5>Movement sciences <br> & Kinesiology</h5>
+												<h3>The <br> science of <br> running.</h3>
+											</div>
+											<div class="bottom-text position-absolute">
+												<div class="heart rounded">
+													<a href="javascript:void(0)" class="text-decoration-none mr-3">
+														<i class="fa fa-heart mr-1"></i>
+														<span>82 Likes</span>
+													</a>
+													<a href="javascript:void(0)" class="text-decoration-none">
+														<i class="fa fa-eye mr-1 text-dark"></i>
+														<span>5min read</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-6">
+									<div class="inner-box">
+										<div class="image">
+											<img src="images/tab-2.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Your Mind</h5>
+											<p>A wearable device to manage stress</p>
+										</div>
+									</div>
+									<div class="inner-box mt-4">
+										<div class="image">
+											<img src="images/tab-3.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Community</h5>
+											<p>Exercise is the best medicine</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-6">
+									<div class="inner-box mt-xl-0 mt-md-0 mt-lg-0 mt-3">
+										<div class="image">
+											<img src="images/tab-4.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Community</h5>
+											<p>Women power The best there is</p>
+										</div>
+									</div>
+									<div class="inner-box mt-4">
+										<div class="image">
+											<img src="images/tab-4.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Your Mind</h5>
+											<p>How is ADHD and Autism different</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane container fade" id="demo3">
+							<div class="row">
+								<div class="col-lg-6 col-md-12">
+									<div class="inner-box position-relative h-100 big">
+										<div class="image h-100">
+											<img src="images/tab-1.png" class="w-100 h-100">
+											<div class="top-text position-absolute">
+												<h5>Movement sciences <br> & Kinesiology</h5>
+												<h3>The <br> science of <br> running.</h3>
+											</div>
+											<div class="bottom-text position-absolute">
+												<div class="heart rounded">
+													<a href="javascript:void(0)" class="text-decoration-none mr-3">
+														<i class="fa fa-heart mr-1"></i>
+														<span>82 Likes</span>
+													</a>
+													<a href="javascript:void(0)" class="text-decoration-none">
+														<i class="fa fa-eye mr-1 text-dark"></i>
+														<span>5min read</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-6">
+									<div class="inner-box">
+										<div class="image">
+											<img src="images/tab-2.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Your Mind</h5>
+											<p>A wearable device to manage stress</p>
+										</div>
+									</div>
+									<div class="inner-box mt-4">
+										<div class="image">
+											<img src="images/tab-3.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Community</h5>
+											<p>Exercise is the best medicine</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-6">
+									<div class="inner-box mt-xl-0 mt-md-0 mt-lg-0 mt-3">
+										<div class="image">
+											<img src="images/tab-4.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Community</h5>
+											<p>Women power The best there is</p>
+										</div>
+									</div>
+									<div class="inner-box mt-4">
+										<div class="image">
+											<img src="images/tab-4.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Your Mind</h5>
+											<p>How is ADHD and Autism different</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane container fade" id="demo4">
+								<div class="row">
+								<div class="col-lg-6 col-md-12">
+									<div class="inner-box position-relative h-100 big">
+										<div class="image h-100">
+											<img src="images/tab-1.png" class="w-100 h-100">
+											<div class="top-text position-absolute">
+												<h5>Movement sciences <br> & Kinesiology</h5>
+												<h3>The <br> science of <br> running.</h3>
+											</div>
+											<div class="bottom-text position-absolute">
+												<div class="heart rounded">
+													<a href="javascript:void(0)" class="text-decoration-none mr-3">
+														<i class="fa fa-heart mr-1"></i>
+														<span>82 Likes</span>
+													</a>
+													<a href="javascript:void(0)" class="text-decoration-none">
+														<i class="fa fa-eye mr-1 text-dark"></i>
+														<span>5min read</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-6">
+									<div class="inner-box">
+										<div class="image">
+											<img src="images/tab-2.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Your Mind</h5>
+											<p>A wearable device to manage stress</p>
+										</div>
+									</div>
+									<div class="inner-box mt-4">
+										<div class="image">
+											<img src="images/tab-3.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Community</h5>
+											<p>Exercise is the best medicine</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-6 ">
+									<div class="inner-box mt-xl-0 mt-md-0 mt-lg-0 mt-3">
+										<div class="image">
+											<img src="images/tab-4.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Community</h5>
+											<p>Women power The best there is</p>
+										</div>
+									</div>
+									<div class="inner-box mt-4">
+										<div class="image">
+											<img src="images/tab-4.png" class="img-fluid" alt="">
+										</div>
+										<div class="text">
+											<h5>Your Mind</h5>
+											<p>How is ADHD and Autism different</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> 
+				</div>
+				<div class="py-3 py-md-5 text-center ">
+					<a href="javscript:void(0)" class="custom-button text-white text-decoration-none ">
+						Explore knowledge hub
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section-11">
+		<div class="container-fluid px-lg-5 px-xl-5 px-md-5 px-3">
+			<div class="py-4 py-md-5">
+				<div class="head-content text-center">
+					<h2 class="font-weight-bold">Ready to transform your health?</h2>
+					<p>Getting ProPhysio services are as easy as a click away</p>
+				</div>
+				<div class="pt-0 pt-md-5">
+					<div class="row justify-content-center">
+						<div class="col-xl-4 col-lg-4 col-md-10 col-12 mt-xl-0 mt-lg-0 mt-md-0 mt-4">
+							<div class="inner-box inner-box-1">
+								<div class="bg-image">
+									<div class="text pt-5 px-4">
+										<h3>Virtual <br> Session</h3>
+										<div class="book-now pt-5">
+											<a href="javascript:void(0)" class="text-dark text-decoration-none">Book now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-4 col-lg-4 col-md-10 col-12 mt-xl-0 mt-xl-0 mt-lg-0 mt-4">
+							<div class="inner-box inner-box-2">
+								<div class="bg-image">
+									<div class="text pt-5 px-4">
+										<h3>Home <br> Visit</h3>
+										<div class="book-now pt-5">
+											<a href="javascript:void(0)" class="text-dark text-decoration-none">Book now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-4 col-lg-4 col-md-10 col-12 mt-xl-0 mt-lg-0 mt-4">
+							<div class="inner-box inner-box-3">
+								<div class="bg-image">
+									<div class="text pt-5 px-4">
+										<h3>Visit <br> Clinic</h3>
+										<div class="book-now pt-5">
+											<a href="javascript:void(0)" class="text-dark text-decoration-none">Book now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="call-us text-center pt-5">
+						<h4 class="font-weight-bold">Not sure where to begin?</h4>
+						<p class="pt-4"> <img src="images/call.svg" width="50px" class="pr-3">
+							 Call us now at <span>1800 465 895</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer id="foot">
+		<div class="container">		
+			<div class="py-lg-5 py-xl-5 py-md-5 py-2">
+				<div class="top clearfix pt-3">
+					<div class="heading-text float-left">
+						<h4 class="text-white">Don’t let the small setbacks stop you <br> from living fully.</h4>
+					</div>
+					<div class="logo float-right">
+						<a href="javascript:void(0)">
+							<img src="images/foot-logo.svg" class="img-fluid">
+						</a>
+					</div>
+				</div>
+				<hr class="my-5">
+				<div class="row">
+					<div class="col-lg-2 col-md-6">
+						<div class="about link">
+							<p>About us</p>
+							<ul class="pl-0 ">
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Vision</a>
+								</li>
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">People</a>
+								</li>
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Partners</a>
+								</li>
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Awards & Affiliations</a>
+								</li>
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Testimonials</a>
+								</li>
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Locations</a>
+								</li>  
+							</ul>
+						</div>
+						<div class="contact link">
+							<p>Contact Us</p>
+								<ul class="pl-0 ">
+									<li class="list-unstyled">
+										<a href="javascript:void(0)" class="text-decoration-none">Locations</a>
+									</li>
+									<li class="list-unstyled">
+										<a href="javascript:void(0)" class="text-decoration-none">Contacts</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6">
+							<div class="services link">
+							<p>Services</p>
+							<ul class="pl-0 ">
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Physiotherapy</a>
+								</li>
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Speech Therapy</a>
+								</li>
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Psychology</a>
+								</li>
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Special Education</a>
+								</li>
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Lifestyle Wellness</a>
+								</li>  
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Urban Health</a>
+								</li>  
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Geriatric Care</a>
+								</li>  
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Movement Science</a>
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Cardiac Therapy</a>
+								</li>  
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none">Postnatal Wellness</a>
+								</li>  
+								<li class="list-unstyled">
+									<a href="javascript:void(0)" class="text-decoration-none"> Occupational Therapy</a>
+								</li>  
+							</ul>
+						</div>              
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="both">
+							<ul class="d-flex">
+								<li class="list-unstyled">
+									<img src="images/foot-hospital.svg">
+								</li>
+								<li>
+									<p>Are you a <span>Hospital</span> <br> looking to setup a clinic?</p>
+								</li>
+							</ul>
+							<ul class="d-flex">
+								<li class="list-unstyled">
+									<img src="images/foot-doctor.svg">
+								</li>
+								<li>
+									<p><span>Health Professional</span><br> looking to work with us?</p>
+								</li>
+							</ul>
+							<ul class="d-flex">
+								<li class="list-unstyled">
+									<img src="images/foot-people.svg" width="35px">
+								</li>
+								<li>
+									<p>Join the <span>ProPhysio <br> community</span> and benefit</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="app">
+							<div class="row">
+								<div class="col-lg-6">
+									<img src="images/foot-img.png" class="img-fluid" alt="">
+								</div>
+								<div class="col-lg-6">
+									<div class="text">
+										<a href="#" class="custom-button text-decoration-none text-white">Download</a>
+										<p class="pt-5 pb-4">Download your Self Care Free Booklet for Shoulder Pain</p>
+										<div class="explore">
+											<a href="#" class="text-decoration-none">Explore more</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="copyright-stripe pt-5 clearfix">
+					<ul class="pl-0 float-left">
+						<li class="list-unstyled d-inline-block pr-2">
+							<a href="#" class="text-decoration-none">Copyright © 2020, ProPhysio. All rights reserved.</a>
+						</li>
+						<li class="list-unstyled d-inline-block px-2">
+							<a href="#" class="text-decoration-none">Terms & conditions</a>
+						</li>
+						<li class="list-unstyled d-inline-block px-2">
+							<a href="#" class="text-decoration-none">Privacy Policy</a>
+						</li>
+						<li class="list-unstyled d-inline-block px-2">
+							<a href="#" class="text-decoration-none">Cookie Policy</a>
+						</li>
+						<li class="list-unstyled d-inline-block pl-2">
+							<a href="#" class="text-decoration-none">Editorial Policy</a>
+						</li>
+					</ul>
+					<ul class="float-right text-right pl-0">
+						<li class="list-unstyled d-inline-block pr-2 pl-2 pl-md-0 pl-lg-0 pl-xl-0 ">
+							<a href="#" class="text-decoration-none"><i class="fab fa-facebook-f"></i></a>
+						</li>
+						<li class="list-unstyled d-inline-block px-2">
+							<a href="#" class="text-decoration-none"><i class="fab fa-twitter"></i></a>
+						</li>
+						<li class="list-unstyled d-inline-block pl-2">
+							<a href="#" class="text-decoration-none"><i class="fab fa-instagram"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
-
 </html>
