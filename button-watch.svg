@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="298" height="72" viewBox="0 0 298 72">
+  <g id="Button_Watch_Video" data-name="Button Watch Video" transform="translate(0)">
+    <rect id="Rectangle_215" data-name="Rectangle 215" width="298" height="72" rx="36" transform="translate(0)" fill="#007ce2"/>
+    <text id="Watch_the_video" data-name="Watch the video" transform="translate(73 22)" fill="#fff" font-size="22" font-family="Montserrat-Medium, Montserrat" font-weight="500"><tspan x="0" y="21">Watch the video</tspan></text>
+    <g id="Group_73914" data-name="Group 73914" transform="translate(10 10)">
+      <g id="Ellipse_2" data-name="Ellipse 2" fill="none" stroke="#fff" stroke-width="2">
+        <circle cx="26" cy="26" r="26" stroke="none"/>
+        <circle cx="26" cy="26" r="25" fill="none"/>
+      </g>
+      <path id="Path_2083" data-name="Path 2083" d="M665.552,465.355a.552.552,0,0,1,0,.974l-10.262,5.724a.586.586,0,0,1-.879-.487V460.117a.586.586,0,0,1,.879-.487Z" transform="translate(-632.716 -439.553)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

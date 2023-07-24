@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Mulish:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+	font-family: 'Montserrat';
+}
+.color-black{
+	color:#000000;
+}
+.custom-navbar ul li a{
+    font-weight: 500;
+}
+.custom-navbar li.nav-item.br a::before {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 18px;
+    background: #B5B5B5;
+    position: relative;
+    right: 16px;
+    top: 4px;
+}
+.custom-navbar li.nav-item.br a::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 18px;
+    background: #B5B5B5;
+    position: relative;
+    left: 16px;
+    top: 4px;
+}
+.custom-navbar .book-now {
+    background-color: #333;
+    padding: 13px 20px;
+    border-radius: 30px;
+    position: relative;
+    bottom: 20px;
+}
+@media (max-width:991px){
+    .custom-navbar .hide-md{
+        position: fixed;
+        left: -250px;
+        transition: 1s ease;
+		top:80px;
+		height:100%;
+		background-color:#fff;
+    }
+	.custom-navbar li.nav-item.br a::after {
+		display: none;
+	}
+	.custom-navbar li.nav-item.br a::before {
+		display: none;
+	}
+    #check:checked ~ .custom-navbar .hide-md{
+        left: 115px;
+    }
+    .bar{
+        position: absolute;
+        right: 30px;
+        cursor: pointer;
+		top:15px;
+    }
+}
+</style>
+<body>
+<div class="container">
+
+        <input type="checkbox" id="check" class="d-none">
+        <label for="check" class="d-block d-xl-none d-lg-none bar">
+            <i class="fa fa-bars"></i>
+        </label>
+        <nav class="custom-navbar d-md-block d-lg-flex">
+        <div class="d-md-flex">
+            <div class="logo-wrapper">
+                <a href="javascript:void(0)" >
+                    <img src="images/Logo.svg" alt="">
+                </a>
+            </div>
+        </div>
+            <div class="ml-auto hide-md">
+                <ul class="pt-2 mb-0">
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link">Are you a Hospital?</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block br list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link">Are you a Doctor?</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link">Call us: 1800 465 895</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link color-black">Services</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link color-black">Knowledge Hub</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link color-black">ProStore</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link color-black">About Us</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class="nav-link color-black">Contact Us</a>
+                    </li>
+                    <li class="nav-item d-md-block d-lg-inline-block list-unstyled">
+                        <a href="javascript:void(0)" class=" book-now text-white text-decoration-none"><i class="fas fa-calendar-alt"></i> <span>Book Now!</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+</div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

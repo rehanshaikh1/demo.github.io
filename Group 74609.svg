@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="83" height="83" viewBox="0 0 83 83">
+  <g id="Group_74609" data-name="Group 74609" transform="translate(-1108 -1617)">
+    <g id="Group_74114" data-name="Group 74114" transform="translate(746.762 -1055.271)">
+      <circle id="Ellipse_14" data-name="Ellipse 14" cx="6.573" cy="6.573" r="6.573" transform="translate(397.743 2687.271)" fill="none" stroke="#e1443b" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <path id="Path_38012" data-name="Path 38012" d="M399.639,2705.552c-11.491.92-3.091,17.987-12.909,21.423" transform="translate(-0.176 -1.132)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <path id="Path_38013" data-name="Path 38013" d="M411.324,2705.552c11.491.92,3.091,17.987,12.909,21.423" transform="translate(-1.699 -1.132)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <path id="Path_38014" data-name="Path 38014" d="M399.875,2736.44a26.141,26.141,0,0,0-7.634-2.728c-2.72-.469-8.1.39-8.333,3.909-.263,3.959,3.959,5.184,7.146,5.384,4.525.282,9.065-1.134,13.107-3.054,3.206-1.523,6.02-3.852,9.378-5.051a13.608,13.608,0,0,1,6.405-.861c4.274.613,6.184,6.148,1.4,8.222-4.058,1.759-8.762.444-12.958-.19" transform="translate(0 -2.87)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <path id="Path_38015" data-name="Path 38015" d="M398.777,2714.826s3.345,7.719-2.059,13.251" transform="translate(-0.794 -1.707)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <path id="Path_38016" data-name="Path 38016" d="M412.431,2714.689s-3.217,8.1,2.444,13.895" transform="translate(-1.711 -1.698)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </g>
+    <g id="Ellipse_124" data-name="Ellipse 124" transform="translate(1108 1617)" fill="none" stroke="#707070" stroke-width="1">
+      <circle cx="41.5" cy="41.5" r="41.5" stroke="none"/>
+      <circle cx="41.5" cy="41.5" r="41" fill="none"/>
+    </g>
+  </g>
+</svg>
