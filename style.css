@@ -1,0 +1,504 @@
+/*loader*/
+/* #loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+} */
+
+/* #loader-overlay img {
+  width: 500px;
+  height: auto;
+} */
+
+/* general code */
+.lg-color {
+  color: #4e22a6;
+}
+a,
+span {
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.h-syncimg {
+  width: 500px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+.card {
+  transition: all 0.2s;
+}
+
+/* .card:hover {
+  scale: 1.1;
+} */
+
+img {
+  transition: all 0.2s;
+}
+
+/* img:not(.img-not-scaled):hover {
+  transform: scale(1.05);
+} */
+
+video {
+  transition: all 0.2s;
+}
+
+video:hover {
+  transform: scale(1.05);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  margin-bottom: 10px;
+}
+.text-gray {
+  color: #8B8B8B;
+}
+/*
+.highlight {
+  color: #ff9900;
+  font-weight: bold;
+}
+  .ln-c{
+    width: 100px;
+    height: 3px;
+    background-color: #4e22a6;
+    margin: 30px 0;
+  }
+ .s-img{
+    height: 100%;
+    object-fit: cover;
+  }
+.highlight {
+    color: #4e22a6; /* Changed for better contrast with green background */
+/* font-weight: bold;
+  } */
+
+/* navbar code */
+.navbar {
+  transition: background-color 0.3s ease-in-out; /* Optional: Add smooth transition effect */
+}
+
+/* Optional: Add a shadow to the navbar for better visibility */
+.navbar.fixed-top {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: Change background color on scroll */
+.navbar.fixed-top.scrolled {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Change the background color as needed */
+}
+
+.navbar.fixed-top {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transform: translateY(0); /* Move it to its original position */
+}
+
+/* Optional: Change background color on scroll */
+.navbar.fixed-top.scrolled {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    1
+  ); /* Change the background color as needed */
+}
+
+nav {
+  padding: 30px 0 !important;
+}
+.nav-item a:hover {
+  color: #4e22a6 !important;
+}
+header .line {
+  width: 100%;
+  height: 25px;
+  background: #4e22a6;
+}
+
+/* homesection */
+
+#homesection {
+  width: 100%;
+  height: 85vh;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)),
+    url(https://www.forbesindia.com/fbimages/900x600/proportional/jpeg/blog/wp-content/uploads/2014/09/healthcare.jpg);
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  background-attachment: fixed;
+}
+/* #homesection {
+    width: 100%;
+    height: 85vh;
+    background: linear-gradient(0deg, rgba(127, 17, 224, 0.5), rgba(0, 0, 0, 0.1)), url(https://www.forbesindia.com/fbimages/900x600/proportional/jpeg/blog/wp-content/uploads/2014/09/healthcare.jpg);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+} */
+
+#homesection .content {
+  padding-top: 150px;
+  color: #fff;
+}
+
+a.btn.mt-md-3.contactus {
+  background: #4e22a6;
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: #fff;
+}
+
+.emphasis {
+  color: #555;
+  background-color: #eef;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/*difference section*/
+#ourdiff {
+  background-color: #fff8f7;
+}
+#ourdiff .box {
+  height: 100%;
+  border: 1px solid #a690d2;
+  padding: 20px;
+  box-shadow: 0 8px 32px 0 rgba(166, 144, 210, 0.8);
+}
+
+#ourdiff i {
+  font-size: 30px;
+  background-color: #a690d2;
+  padding: 10px;
+  color: #fff;
+  border-radius: 50%;
+}
+#ourdiff .box h4 {
+  margin: 20px 0;
+}
+#ourdiff .row p {
+  line-height: 2;
+  font-size: 18px;
+  text-align: justify;
+}
+
+/*Service section*/
+.service-title {
+  color: #0056b3;
+  font-weight: bold;
+}
+.service-description {
+  margin-bottom: 20px;
+}
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+.services-list li {
+  flex: 1 1 200px;
+  margin-bottom: 10px;
+}
+
+.service-description {
+  margin-bottom: 20px;
+}
+.services-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+}
+.flex-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style-type: none; /* Removes default list styling */
+  /*background-color: #f5f5f5; */
+  padding: 20px; /* Adds some padding around the container */
+}
+.flex-list-item {
+  flex: 1 1 150px; /* Adjust '150px' to change the minimum column width before wrapping */
+  margin: 10px; /* Adds space between items */
+  background-color: #ffffff; /* Item background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow to each item */
+  padding: 10px; /* Padding inside each item */
+  box-sizing: border-box; /* Ensures padding does not affect the overall defined width */
+  text-align: center; /* Centers text inside each item */
+}
+.service-ul li {
+  font-family: "poppins";
+  border: 1px solid #a690d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+.s-img {
+  height: 100%;
+  object-fit: cover;
+}
+.t-content {
+  padding: 40px;
+  background: #e0d8f0;
+}
+.servic-e-cont .each-serve .col-lg-6:nth-child(1) .t-content{
+    border-top-left-radius: 20px; /* Adjust the value as needed */
+}
+.servic-e-cont .each-serve .col-lg-6:nth-child(2) img{
+  border-top-right-radius: 20px; /* Adjust the value as needed */
+}
+.servic-e-cont .each-serve .col-lg-6:nth-child(3) img{
+  border-bottom-left-radius: 20px; /* Adjust the value as needed */
+}
+.servic-e-cont .each-serve .col-lg-6:nth-child(4) .t-content{
+  border-bottom-right-radius: 20px; /* Adjust the value as needed */
+}
+/*about section*/
+
+.about-content p {
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.bottom-border-t::after {
+  content: "";
+  display: block;
+  width: 200px;
+  height: 2px;
+  margin-left: 41%;
+  margin-top: 25px;
+  background: #4e22a6;
+}
+
+/*blog section*/
+#healthblog {
+  background-color: #fff8f7;
+}
+#healthblog .card {
+  border: 0 !important;
+  height: 100%;
+}
+#healthblog .card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 27px;
+  font-family: "poppins";
+}
+#healthblog .card-body h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "poppins";
+}
+#healthblog .card img {
+  height: 300px;
+  object-fit: cover;
+}
+
+#healthblog .card-text {
+  flex-grow: 1;
+}
+#healthblog .card-body a {
+  background-color: #fff;
+  border-color: #4e22a6;
+  color: #4e22a6;
+}
+#healthblog .card-body p {
+  color: #aeaeae;
+}
+#healthblog .card-body a:hover {
+  color: #fff;
+  background-color: #4e22a6;
+}
+
+.health-blog {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+.health-blog h2,
+.health-blog h3 {
+  color: var(--primary-color);
+}
+.health-blog p {
+  color: var(--text-color);
+}
+.health-blog .btn-primary {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+.health-blog .btn-primary:hover {
+  background-color: darken(var(--accent-color), 10%);
+  border-color: darken(var(--accent-color), 10%);
+}
+
+/*contact section*/
+
+.c-details {
+  box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
+  padding: 40px;
+  color: #8b8c90;
+}
+.c-details i {
+  font-size: 30px;
+}
+.contactus form {
+  font-family: "poppins";
+}
+.contactus form h1 {
+  font-family: "poppins";
+}
+.contactus form .formsubmitbtn {
+  background: #4e22a6;
+  padding: 10px 20px;
+  color: #fff;
+}
+
+.form-control:focus {
+  color: #000000;
+  background-color: transparent;
+  -webkit-box-shadow: unset;
+  box-shadow: unset;
+  outline: 0;
+  border: 1px solid #4e22a6;
+}
+.form-control {
+  height: 50px;
+  color: #1e344c;
+  border: 1px solid #ebebeb;
+  background-color: transparent;
+  border-radius: 0;
+  font-size: 16px;
+  /* padding: 10px 20px; */
+  width: 100%;
+}
+.contactus form textarea {
+  height: 100%;
+}
+
+/* back to top */
+.back-to-top {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  width: 50px;
+  height: 50px;
+  transition: all 0.2s;
+  background-color: #4e22a6 !important;
+  border-radius: 50%;
+  border: 1px solid;
+}
+.back-to-top:hover {
+  background-color: #a690d2 !important;
+  color: #fff !important;
+  border: 1px solid;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .health-blog .btn-primary {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .img-col {
+    text-align: center;
+  }
+  .img-col img {
+    width: auto;
+  }
+}
+
+@media (max-width: 992px) {
+  a.nav-link.text-dark {
+    font-size: 15px;
+  }
+  .nav-logo {
+    width: 170px;
+  }
+  .odetailcol{
+    display: block !important;
+    margin-bottom: 50px;
+  }
+  .col-lg-6.col-md-12:nth-child(3) {
+    order: 1;
+}
+.servic-e-cont .each-serve .col-lg-6:nth-child(1) .t-content{
+  border-top-right-radius: 20px; /* Adjust the value as needed */
+}
+.servic-e-cont .each-serve .col-lg-6:nth-child(2) img{
+  border-top-right-radius: 0; /* Adjust the value as needed */
+  border-bottom-right-radius: 20px; /* Adjust the value as needed */
+  border-bottom-left-radius: 20px; /* Adjust the value as needed */
+
+  }
+  .servic-e-cont .each-serve .col-lg-6:nth-child(4) {
+    margin-top: 50px;
+    }
+    .servic-e-cont .each-serve .col-lg-6:nth-child(4) .t-content {
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+  }
+  .servic-e-cont .each-serve .col-lg-6:nth-child(3) img {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.servic-e-cont img.s-img.img-fluid {
+  height: 450px;
+  width: 100%;
+}
+}
+
+@media (max-width: 1200px) {
+  .h-syncimg {
+    width: 400px;
+}
+.img-col{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+}
+
+.navbar-toggler {
+  background-color: #4e22a6;
+}
